@@ -31,13 +31,15 @@ layout: default
         • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
       {%- endif -%}</p>
 
-    <p class="post-meta">
-      {% assign tags_count = page.tags | size %}
+    {% assign tags_count = page.tags | size %}
+    {%- if tags_count > 0 -%}
+    <p class="post-meta" style="margin-top: 0.5em">
       {% for tag in page.tags %}
         {% capture tag_name %}{{ tag }}{% endcapture %}
         <a href="/tags#{{ tag_name }}">{{ tag_name }}</a>{% if forloop.index < tags_count %},{% endif %}
       {% endfor %}
     </p>
+    {%- endif -%}
 
   </header>
 
