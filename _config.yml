@@ -51,6 +51,10 @@ giscus:
 disclaimer: "Everything here is solely my own and does not reflect the views of any institutions I may be affiliated with"
 
 
+# Google Analytics
+google_analytics: G-KC3SNPZJ0P
+
+
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
