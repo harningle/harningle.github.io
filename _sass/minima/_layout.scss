@@ -130,7 +130,7 @@
 
 .footer-col {
   float: left;
-  margin-bottom: calc((#{$spacing-unit}) / 2);
+  margin-bottom: 0;
   padding-left: calc((#{$spacing-unit}) / 2);
 }
 
@@ -170,6 +170,10 @@
   }
 }
 
+.disclaimer {
+  @include relative-font-size(0.9375);
+  color: $grey-color;
+}
 
 
 /**

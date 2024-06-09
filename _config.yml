@@ -25,13 +25,31 @@ url: "https://harningle.github.io" # the base hostname & protocol for your site,
 github_username: harningle
 linkedin_username: xuanyi-wang-290762144
 
+
 # Build settings
 theme: minima
 plugins:
     - jekyll-feed
-
 minima:
     skin: auto
+
+
+# giscus comments
+comments: true
+giscus:
+    repo:              "harningle/harningle.github.io"
+    repo-id:           "R_kgDOMEBSQA"
+    category:          "Announcements"
+    category-id:       "DIC_kwDOMEBSQM4Cfzhs"
+    mapping:           "pathname"
+    reactions-enabled: "1"
+    theme:             "preferred_color_scheme"
+    crossorigin:       "anonymous"
+
+
+# Disclaimer
+disclaimer: "Everything here is solely my own and does not reflect the views of any institutions I may be affiliated with"
+
 
 # Exclude from processing.
 # The following items will not be processed, by default.
