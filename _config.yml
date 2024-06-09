@@ -30,6 +30,7 @@ linkedin_username: xuanyi-wang-290762144
 theme: minima
 plugins:
     - jekyll-feed
+    - jekyll-sitemap
 minima:
     skin: auto
 
