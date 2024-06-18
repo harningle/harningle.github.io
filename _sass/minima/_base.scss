@@ -64,14 +64,22 @@ img {
 /**
  * Figures
  */
-figure > img {
+figure {
   display: block;
-}
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
 
-figcaption {
-  font-size: $small-font-size;
-}
+  img {
+    width: 100%;
+    vertical-align: middle;
+  }
 
+  p {
+    font-size: $small-font-size;
+    color: $grey-color-dark;
+  }
+}
 
 
 /**
@@ -132,9 +140,9 @@ blockquote {
   color: $grey-color;
   border-left: 4px solid $grey-color-light;
   padding-left: calc((#{$spacing-unit}) / 2);
-  @include relative-font-size(1.125);
-  letter-spacing: -1px;
+  font-family: "Playfair Display", serif;
   font-style: italic;
+  font-optical-sizing: auto;
 
   > :last-child {
     margin-bottom: 0;

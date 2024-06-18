@@ -2,20 +2,32 @@
 layout: default
 ---
 
-  <script>
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$']]
-      }
-  };
-  </script>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<!-- jQuery for sidenote -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
+<!-- "$"" to start inline math  -->
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$']]
+    }
+};
+</script>
+
+<!-- MathJax -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<!-- font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+
+<!-- Usual Jekyll stuff -->
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | smartify }}</h1>
     <p class="post-meta">
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
@@ -51,3 +63,105 @@ layout: default
 
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
 </article>
+
+
+<!-- show footnote also as sidenote -->
+<!-- https://github.com/kaushikgopal/henry-hugo/blob/master/assets/js/sidenotes.js -->
+<script>
+(function () {
+  // Some positioning vars.
+  const $footnotes      = $(".footnotes"),
+    contentWidth        = $(".wrapper").outerWidth(),
+    sideNoteStartMargin = parseInt($(".post-title").css("margin-bottom")) * 2,
+    sideNoteMaxWidth    = contentWidth / 2.75,
+    sideNoteMinWidth    = contentWidth / 5;
+
+  // After everything is loaded, show the sidenotes. Need `on("load")` bc.
+  // we want to wait all images to be loaded, so the positioning of sidenotes
+  // are correct
+  $(window).on("load", function () {
+    // Exit if no footnote at all
+    if ($footnotes.length < 1) {
+      return;
+    }
+
+    // Show sidenotes
+    loadSideNotesFromFootnotes();
+
+    // If the browser's size changes, change the size/positioning of the
+    // sidenotes as well
+    $(window).resize(function () {
+      loadSideNotesFromFootnotes();
+    });
+  });
+
+
+  function loadSideNotesFromFootnotes() {
+    // Compute the positioning of sidenotes
+    const $postTitle = $(".post-title"),
+      browserWidth   = $(".site-header").width(),
+      startPosition  = $postTitle.position().left
+        + $postTitle.outerWidth()
+        + sideNoteStartMargin;
+
+    // Remove any existing sidenotes, e.g. those before browser window resizing
+    $(".sidenotes").remove();
+    $footnotes.show();  // Previous resize could have hidden footnotes
+
+    // Check if have enough space to show sidenotes. On mobile devices usually
+    // there is no such space so won't show them
+    const availabeSpaceForSideNote = browserWidth - startPosition;
+    if (availabeSpaceForSideNote < sideNoteMinWidth) {
+      return;
+    }
+
+    // Create sidenotes for each footnote
+    const $fnItems = $footnotes.find("ol li");
+    $("sup").each(function (index) {
+      const $footnoteHtml = $fnItems.eq(index).html();
+      createSideNote($(this), $footnoteHtml, startPosition);
+    });
+  }
+
+
+  function removeReverseFootnote(text) {
+    // Find the return to text hyperlink in footnote
+    const pat = /<a href="#fnref[^<]*<\/a>/g;
+    const matches = Array.from(text.matchAll(pat));
+    if (matches.length > 0) {
+      return text.replace(matches[0][0], "");
+    }
+    return text;
+  }
+
+
+  function createSideNote(superscript, footnoteHtml, startPosition) {
+    // Construct sidenote div
+    let div = $(document.createElement('div'))
+      .html(removeReverseFootnote(footnoteHtml))
+      .addClass("sidenotes");
+
+    // Set position of the div
+    const topPosition = superscript.offset();
+    div.css({
+      position: "absolute",
+      left: startPosition,
+      top: topPosition["top"],
+    });
+
+    // When the mouse is hovering on the footnote superscript, highlight the
+    // sidenode, as the default font colour of the sidenote is slightly muted
+    superscript.hover(function () {
+      div.addClass("sidenotes-hover");
+    }, function () {
+      setTimeout(function () {
+        div.removeClass("sidenotes-hover");
+      }, 1000);
+    });
+
+    // Add sidenote div
+    $(document.body).append(div);
+  }
+
+})();
+</script>

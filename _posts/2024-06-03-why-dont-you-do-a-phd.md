@@ -2,18 +2,23 @@
 layout:       post
 title:        "Why don't you do a Ph.D.?"
 date:         2024-06-03
-last_updated: 2024-06-04
+last_updated: 2024-06-19
 tags:         econ
 ---
 
-I decided not to do a Ph.D. and started job search very abruptly in early 2022. This is partly due to financial reasons. Since I'd never thought about industry before, everything on my CV was RA, and zero internship. So one very fair question that I got and keep getting in almost every job interview is "why don't you do a Ph.D.?" Here are the real reasons:
+
+<p><font color="#828282">(Constantly updated)</font></p>
+
+I decided not to do a Ph.D. and started job search very abruptly in early 2022. This is partly due to financial reasons. Since I'd never thought about industry before, everything on my CV was RA, and zero internship. So one very fair question that I got and keep getting in almost every job interview is "why don't you do a Ph.D.?"[^answer] Here are the real reasons:
+
+[^answer]: If you are also considering quitting, make sure you have a good answer to this. My very personal suggestion is, make sure you *do* get some (good) offers. So your answer can be: "oh you know I do easily get these grad school offers, but I'm no longer interested." That is, convince people that Ph.D. is *within your constraint* and quitting is your *choice*, instead of Ph.D. being *beyond your capability*! The opposite would be: "no I don't like academia", but then the interviewer might see you as an incompetent/failed student.
 
 * Matray constant $\mathscr{m} = 1.8$
     + feel free to shrink your DID pre-treatment coefficients by a factor of $1.8$ to get a nice pre-trend, and this is "unintentional and made in good faith"
     + [retraction](https://www.aeaweb.org/articles?id=10.1257/aer.113.7.2053), author's [webpage](https://web.archive.org/web/20240603021537/https://sites.google.com/view/adrienmatray/papers?authuser=0), author's responses ([1](https://www.dropbox.com/scl/fi/264cyt3m3e9frkldsvgch/statement_AER.pdf?rlkey=2i7isi0tp4iq170igz3tdrdsd&dl=0), [2](https://www.dropbox.com/s/jq1bmy6q39fmlcu/supplemental_note.pdf?dl=0), [3](https://www.dropbox.com/s/skenqoxmygjxfcr/retraction_note_for_website.pdf?dl=0), [4](https://www.dropbox.com/s/xfrdxsso8k1mmux/Matray_2023.pdf?dl=0)), [EJMR](https://www.econjobrumors.com/topic/the-great-matray-scam-2023)
 * Vuillemey's lost regression
     + write but don't run the code, and then fake whatever numbers you want in the draft. Finally "original data and code that produced the published results" can be conveniently lost
-    + [retraction](https://onlinelibrary.wiley.com/doi/10.1111/jofi.13064), JoF [response](https://afajof.org/2021/07/answers-to-faq-about-the-recent-retraction-of-an-article-in-the-jf/), [Retraction Watch](https://retractionwatch.com/2021/07/08/researchers-forfeit-10000-award-when-papers-findings-cant-be-replicated/), [EJMR](https://www.econjobrumors.com/topic/jf-article-is-retracted)
+    + [retraction](https://onlinelibrary.wiley.com/doi/10.1111/jofi.13064), *JoF* [response](https://afajof.org/2021/07/answers-to-faq-about-the-recent-retraction-of-an-article-in-the-jf/), [Retraction Watch](https://retractionwatch.com/2021/07/08/researchers-forfeit-10000-award-when-papers-findings-cant-be-replicated/), [EJMR](https://www.econjobrumors.com/topic/jf-article-is-retracted)
 * Giuliano and Spilimbergo's missing data
     + fabricate the findings until someone catches you. Then "the original codes and data sets" are again conveniently lost
     + [retraction](https://doi.org/10.1093/restud/rdac085), Bietenbeck and Thiemann's (*JAE* [2023](https://doi.org/10.1002/jae.2970)) replication study
@@ -39,7 +44,7 @@ I decided not to do a Ph.D. and started job search very abruptly in early 2022. 
     + we always see $p = 0.049$ but never see $p = 0.051$ (Brodeur et al, *AER* [2016](http://dx.doi.org/10.1257/app.20150044); *AER* [2020](https://doi.org/10.1257/aer.20190687))
     + want to publish with null results? In your dreams! (Chopra et al., *EJ* [2024](https://doi.org/10.1093/ej/uead060))
 * Oh you also need connections
-    + Azoulay et al. (*QJE* [2010](https://doi.org/10.1162/qjec.2010.125.2.549); AER* [2019](https://doi.org/10.1257/aer.20161574)), Brogaard et al. (*JFE* [2014](https://doi.org/10.1016/j.jfineco.2013.10.006)), Carrell et al. (*JPE* [Forthcoming](https://doi.org/10.1086/730208)), Colussi (*REStat* [2018](https://doi.org/10.1162/REST_a_00666)), Rubin and Rubin (*JPE* [2021](https://doi.org/10.1086/715021)), Zinovyeva and Bagues (*AEJ: Applied* [2015](https://doi.org/10.1257/app.20120337))
+    + Azoulay et al. (*QJE* [2010](https://doi.org/10.1162/qjec.2010.125.2.549); *AER* [2019](https://doi.org/10.1257/aer.20161574)), Brogaard et al. (*JFE* [2014](https://doi.org/10.1016/j.jfineco.2013.10.006)), Carrell et al. (*JPE* [Forthcoming](https://doi.org/10.1086/730208)), Colussi (*REStat* [2018](https://doi.org/10.1162/REST_a_00666)), Rubin and Rubin (*JPE* [2021](https://doi.org/10.1086/715021)), Zinovyeva and Bagues (*AEJ: Applied* [2015](https://doi.org/10.1257/app.20120337))
 * Try to live as long as possible! As a paper can take ~20 years before getting published
     + Smith et al. (*QJE* [2021](https://doi.org/10.1093/restud/rdab001)): 24 years. Authors' story [here](https://x.com/LonesSmith/status/1369763777537847298)
     + Martinez-Bravo et al. (*AER* [2022](https://doi.org/10.1257/aer.20181249)): 15 years. Authors' story [here](https://mp.weixin.qq.com/s/7b6YHc5cRuPUO2KeamwHgA). One RA's story [here](https://weibo.com/7214391486/L2TAnq9QL)

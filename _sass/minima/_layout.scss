@@ -256,4 +256,43 @@
       @include relative-font-size(1.125);
     }
   }
+
+  .footnotes {
+    border-top: 1px solid #aaa;
+    padding-top: calc((#{$spacing-unit}) / 3);
+    margin-top: calc((#{$spacing-unit}) * 1.5);
+    font-size: $small-font-size;
+    color: $grey-color-dark;
+  }
+}
+
+.sidenotes {
+  min-width: calc((#{$content-width}) / 5);
+  max-width: calc((#{$content-width}) / 2.5);
+  color: $grey-color-light;
+  font-size: $small-font-size;
+  border-left: calc((#{$spacing-unit}) / 15) solid $grey-color-light;
+  padding-left: calc((#{$spacing-unit}) / 4);
+  -webkit-transition: all 500ms ease-out;
+  -ms-transition: all 500ms ease-out;
+  transition: all 500ms ease-out;
+  transition-delay: 1s;
+
+  p {
+    margin-bottom: 0px;
+  }
+}
+
+.sidenotes:hover {
+  color: $grey-color-dark;
+  border-left-color: $grey-color-dark;
+  transition-delay: 0s;
+}
+
+.sidenotes-hover {
+  color: $grey-color-dark;
+  border-left-color: $grey-color-dark;
+  -webkit-transition: all 500ms ease-out;
+  -ms-transition: all 500ms ease-out;
+  transition: all 500ms ease-out;
 }
