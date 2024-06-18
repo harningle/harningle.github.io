@@ -1,7 +1,7 @@
 ---
 layout:       post
 title:        Warren Buffett, China Syndrome, and how to $p$-hack a rawdata plot
-date:         2024-06-19
+date:         2024-06-18
 tags:         [econ, visualisation, p-hacking]
 ---
 
