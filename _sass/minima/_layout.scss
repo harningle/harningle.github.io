@@ -281,12 +281,25 @@
   p {
     margin-bottom: 0px;
   }
+
+  p a {
+    color: #E9F1FC;
+    -webkit-transition: all 500ms ease-out;
+    -ms-transition: all 500ms ease-out;
+    transition: all 500ms ease-out;
+    transition-delay: 1s;
+  }
 }
 
 .sidenotes:hover {
   color: $grey-color-dark;
   border-left-color: $grey-color-dark;
   transition-delay: 0s;
+
+  p a {
+    color: #2A7AE2;
+    transition-delay: 0s;
+  }
 }
 
 .sidenotes-hover {
@@ -295,4 +308,11 @@
   -webkit-transition: all 500ms ease-out;
   -ms-transition: all 500ms ease-out;
   transition: all 500ms ease-out;
+
+  p a {
+    color: #2A7AE2;
+    -webkit-transition: all 500ms ease-out;
+    -ms-transition: all 500ms ease-out;
+    transition: all 500ms ease-out;
+  }
 }

@@ -9,7 +9,8 @@ layout: default
 <script>
   MathJax = {
     tex: {
-      inlineMath: [['$', '$']]
+      inlineMath: [['$', '$']],
+      tags: 'ams'
     }
 };
 </script>
@@ -22,6 +23,9 @@ layout: default
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/fontawesome.min.js" data-auto-replace-svg="nest"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/solid.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/brands.min.js"></script>
 
 <!-- Usual Jekyll stuff -->
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
@@ -65,6 +69,77 @@ layout: default
 </article>
 
 
+<!--
+make markdown syntax highlighting the same as Jekyll highlighting
+
+When we use markdown syntax highlighting to start a code block, Jekyll renders
+it differently from Jekyll highlight block. Basically whenever we use markdown
+highlighting, the language info. is not in <code> tag but in <div> tag
+(jekyll/jekyll#6448). Then highlight.js only looks into <code> and thus it finds
+no language info., and it will have to guess the language. The guess is often
+not great. Therefore, we have to manually find the language in the parent <div>
+of <code> and then add the language as a class to <code>. After all the mess, we
+can use highlight.js.
+-->
+<script>
+$(function() {
+  $('code').each(function() {
+    // Find the language in markdown syntax highlighting
+    var $parentDiv = $(this).closest('div.highlighter-rouge')
+    if ($parentDiv.length) {
+      var language = $parentDiv.attr('class').split(' ').find(function(c) {
+        return c.startsWith('language-');
+      });
+      if (language) {
+
+        // Add it to <code> so highlight.js can know
+        $(this).addClass(language);
+
+        // Add a highlight tool bar just like hexo-theme-butterfly
+        var languageName = language.replace('language-', '');
+        var highlightTools = `
+          <div class="highlight-tools">
+            <i class="fa-solid fa-angle-down expand"></i>
+            <div class="code-lang">${languageName}</div>
+            <i class="fa-solid fa-paste copy-button"></i>
+          </div>
+        `;
+        $parentDiv.prepend(highlightTools);
+      }
+    }
+  });
+});
+</script>
+
+<!-- fold and unfold button and copy button -->
+<script>
+$(document).ready(function() {
+  $('.highlighter-rouge > .highlight-tools > i.expand').on('click', function() {
+    $(this).closest('.highlighter-rouge').find('.highlight').toggleClass('closed');
+    $(this).closest('.highlighter-rouge').find('.highlight-tools').toggleClass('closed');
+  });
+
+  $('.highlighter-rouge > .highlight-tools > i.copy-button').on('click', function() {
+    const textToCopy = $(this).closest('.highlighter-rouge').find('div.highlight').text();
+    navigator.clipboard.writeText(textToCopy);
+  });
+});
+</script>
+
+<!-- after the highlighting is corrected above, use highlight.js -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/stata.min.js"></script>
+
+<script>
+setTimeout(function() {
+  $(document).ready(function() { 
+     hljs.highlightAll();
+  });
+}, 1000);
+</script>
+
+
 <!-- show footnote also as sidenote -->
 <!-- https://github.com/kaushikgopal/henry-hugo/blob/master/assets/js/sidenotes.js -->
 <script>
@@ -80,6 +155,7 @@ layout: default
   // we want to wait all images to be loaded, so the positioning of sidenotes
   // are correct
   $(window).on("load", function () {
+
     // Exit if no footnote at all
     if ($footnotes.length < 1) {
       return;
@@ -154,14 +230,11 @@ layout: default
     superscript.hover(function () {
       div.addClass("sidenotes-hover");
     }, function () {
-      setTimeout(function () {
         div.removeClass("sidenotes-hover");
-      }, 1000);
     });
 
     // Add sidenote div
     $(document.body).append(div);
   }
-
-})();
+}());
 </script>

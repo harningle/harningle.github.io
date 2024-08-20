@@ -56,7 +56,6 @@ disclaimer: "Everything here is solely my own and does not reflect the views of 
 kramdown:
     smart_quotes:  ["rsquo", "rsquo", "ldquo", "rdquo"]
 
-
 # Google Analytics
 google_analytics: G-KC3SNPZJ0P
 
