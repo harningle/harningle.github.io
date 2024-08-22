@@ -2,12 +2,13 @@
 layout:       post
 title:        "Synthetic control in Python"
 date:         2024-08-20
+last_updated: 2024-08-22
 tags:         [econ]
 ---
 
 <p><font color="#828282">(Code available at <a href="https://github.com/harningle/useful-scripts/tree/main/synth">harningle/useful-scripts</a>)</font></p>
 
-**TL;DR: CVXPY in Python is 800x faster than `synth` in Stata.**
+**TL;DR: CVXPY in Python is 60x faster than `synth` in Stata**
 
 Recently I was asked to do something using synthetic control in my day job. The official Stata commands [`synth`](https://web.stanford.edu/~jhain/synthpage.html) and [`sdid`](https://github.com/Daniel-Pailanir/sdid) from the authors are both outrageously slow. I don't know R very well, and apparently am not able to code in C properly, so Python is the only alternative. There are fortunately many existing Python implementations.[^existing-Python-implementations] However, some of them give slightly different results from the Stata ones. So I decided to write my own synthetic control, which should be close to Stata's estimation, and benchmark the speed/performance.
 
@@ -89,6 +90,14 @@ pre = pre \
     .set_index(['state', 'year']) \
     .unstack(level=0) \
     .stack(level=0, future_stack=True)
+
+# Normalise so each row has unit variance
+temp = pre.values
+avg = temp.mean(axis=1, keepdims=True)
+std_dev = temp.std(axis=1, keepdims=True)
+temp = (temp - avg) / std_dev
+pre = pd.DataFrame(temp, index=pre.index, columns=pre.columns)
+del temp
 print(pre.shape)  # (19, 39)
 
 # X_0 is the column for California
@@ -181,60 +190,16 @@ erase "data/stata_synth.dta"
 
 ## Same as Stata's estimates?
 
-Now we plot the optimal weights solved from ($\ref{eq:optimisation}$) below. The big picture is more or less the same: the weights are sparse; only five states get a non-zero weight in the right panel below. However, within those five states, there is quite some difference. For example, the Stata package assigns **15%+ more** weights on Montana than Python implementations. Both SciPy and CVXPY gives almost identical numbers.
+Now we plot the optimal weights solved from ($\ref{eq:optimisation}$) below. All implementations give very similar weights: the weights are sparse; only five states in the right panel get a non-zero weight.
 
 <figure>
     <img src="https://github.com/harningle/useful-scripts/raw/main/synth/figures/weights.svg">
 </figure>
 
-To figure out why the results are different, I first check if the optimisation is set up correctly. In principle, if we feed Stata's weights into the optimisation, we should:
-
-1. satisfies all constraints, so that constraints are correct
-1. get the same effect size/ATT as Stata, so that if we have the same weights, we will have same effect size
-1. get the same loss as Stata, so that the loss function is correct
-
-```python
-import numpy as np
-
-stata = pd.read_csv('data/stata_synth.csv')
-w_stata = stata['_W_Weight'].values
-
-# 1. constraints happy?
-assert (w_stata >= 0).all() and (w_stata <= 1).all()
-
-# 2. same ATT?
-att_stata = stata['_Y_synthetic'].values
-entire_period = df[['state', 'year', 'cigsale']]  # Get the full sample to wide
-entire_period = entire_period \
-    .set_index(['state', 'year']) \
-    .unstack(level=0) \
-    .stack(level=0, future_stack=True)
-entire_period.drop(columns=['California'], inplace=True)
-print(entire_period.shape)  # (31, 38)
-att_scipy = entire_period.values @ w_stata
-np.testing.assert_array_almost_equal(att_scipy, att_scipy)
-
-# 3. same loss?
-def loss(w, X_0, X_1):
-    resid = X_0 - X_1 @ w
-    return resid.T @ resid
-
-temp = stata[stata['_time'] <= 1988]
-loss_stata = ((temp['_Y_treated'] - temp['_Y_synthetic']) ** 2).sum()
-print(loss_stata)  # 54.7451436809619
-np.testing.assert_approx_equal(loss(w_stata, X_0, X_1), loss_stata)
-```
-
-Passed all three tests, so our optimisation setup has no problem. Now the only explanation is that Stata is wrong, i.e. not find the optimum... Recall the loss from CVXPY above: that is 52.xxx. Here Stata's loss is 54.xxx. Stata's loss is **5% higher**! After checking the documentation of `synth` in Stata, it seems to have a `nested` option that gives better convergence. After specifying that, Stata is much slower (as expected), but now we get almost identical weights! Great! Our code is correct!
-
-<figure>
-    <img src="https://github.com/harningle/useful-scripts/raw/main/synth/figures/weights_nested.svg">
-</figure>
-
 
 ## Performance benchmark
 
-Finally, we compare the speed of different implementations. Stata is too slow so I have to use log $y$ axis. All Python implementations are roughly 500x faster than the Stata one (, which is not surprising at all).[^c-also-slow] SciPy is the slowest among Python implementations. This is also expected as `scipy.optimize.minimize` aims at solving general optimisation problems, so it does not exploit the convexity of our problem. On the other side, CVXPY can only solve convex problems (, and in fact it first [checks](https://www.cvxpy.org/tutorial/dcp/index.html#dcp-problems) whether your problem is indeed convex before proceeding to solve it,) and utilise all maths that helps to solve it quickly. Therefore, CVXPY is roughly 2.5x quicker than SciPy.
+Finally, we compare the speed of different implementations. Stata is too slow so I have to use log $y$ axis. All Python implementations are roughly 30x faster than the Stata one (, which is not surprising at all).[^c-also-slow] SciPy is the slowest among Python implementations. This is also expected as `scipy.optimize.minimize` aims at solving general optimisation problems, so it does not exploit the convexity of our problem. On the other side, CVXPY can only solve convex problems (, and in fact it first [checks](https://www.cvxpy.org/tutorial/dcp/index.html#dcp-problems) whether your problem is indeed convex before proceeding to solve it,) and utilise all maths that helps to solve it quickly. Therefore, CVXPY is roughly 2.5x quicker than SciPy.
 
 [^c-also-slow]: One surprising fact is that even without `nested` option, Stata is still an order of magnitude slower. If I read the doc. correctly, `synth` uses a C++ plugin to get the weights when `nested` is not specified. It shouldn't be that slow. A reasonable speedup factor for usual `reg` is at least 10x, as documented by [Mauricio M. Cáceres Bravo](https://mcaceresb.github.io/stata/plugins/2017/02/15/writing-stata-plugins-example.html). I don't know why it does not achieve a good efficiency here.
 
@@ -246,3 +211,12 @@ Finally, we compare the speed of different implementations. Stata is too slow so
 We do manage to make SciPy slightly faster by providing the closed-form gradient vector. SciPy needs to compute the partial derivatives of objection function w.r.t. the weights.[^gradient] The SciPy default is to compute the numerical derivatives, i.e. take $x$ and $x + \Delta x$, compute $f(x + \Delta x) - f(x)$, and finally divide that by $\Delta x$, with a sufficiently small $\Delta x$. This is slow. If we provide the derivative $f'(x)$ directly, then SciPy can simply plug in $x$ and get the number. And indeed we do observe a doubled speed when the gradient, i.e. Jacobian matrix, is provided to SciPy. But after all, CVXPY should be the preferred method.
 
 [^gradient]: Again, this is not unheard-of. In OLS, we want to minimise $RSS = (y - X\beta)^T(y - X\beta)$, and we also compute the derivatives $\displaystyle\frac{\text{d}RSS}{\text{d}\beta} = -2X^T(y - X\beta)$.
+
+
+## Mistakes I've made
+
+**Standardisation.** The scale/magnitude of matching variables shouldn't matter when we compute the "similarity" between California and the weighted average. An example will be, we match both $cigsale$ and $beer$. Beer sales are like 20, 30-ish, while cigarette sales are 100, 130-ish. It's super easy to have a difference of 30 in cigarette sales, while in beer sales the differences are usual around 5. In the similarity computation, the 30 is obviously larger than 5. However, does it mean $beer$ is less important than $cigsale$? No! Therefore, we should normalise all variables to have unit variance first. Abadie (JEL [2021](https://doi.org/10.1257/jel.20191450)) briefly mentions this in Section 3.2.[^standardisation] I didn't realise this until I see their official R implementation.
+
+[^standardisation]: Abadie and Gardeazabal (*AER* [2003](https://doi.org/10.1257/000282803321455188)) and Abadie et al. (JASA [2010](https://dx.doi.org/10.1198/jasa.2009.ap08746)) don't even mention the word "normalise" or "standardise" or "variance" or "standard deviation"...
+
+**`nested`.** There is a `nested` option in `synth` in Stata. The docs. says this option gives you better convergence, so I thought specifying `nested` would give us more accurate weights. This is *wrong*. When we don't provide `customV`, i.e. when the problem itself has to figure out the relative importance of matching variables, the problem is not convex. `nested` gives you a higher chance to find the global optimal. If we want to specify the relative importance, which in this post is set to be equal importance, then no `nested` is needed. Once `nested` is specified, you lose control of `customV`. So if we want to compare the results using the same `customV`, then `nested` *shouldn't* be specified. See [part 2]({% link _posts/2024-08-20-synthetic-control-in-python.md %}) for a more detailed discussion.
