@@ -271,8 +271,6 @@
   max-width: calc((#{$content-width}) / 2.5);
   color: $grey-color-light;
   font-size: $small-font-size;
-  border-left: calc((#{$spacing-unit}) / 15) solid $grey-color-light;
-  padding-left: calc((#{$spacing-unit}) / 4);
   -webkit-transition: all 500ms ease-out;
   -ms-transition: all 500ms ease-out;
   transition: all 500ms ease-out;
@@ -291,9 +289,20 @@
   }
 }
 
+.sidenotes.right {
+  border-left: calc((#{$spacing-unit}) / 15) solid $grey-color-light;
+  padding-left: calc((#{$spacing-unit}) / 4);
+}
+
+.sidenotes.left {
+  border-right: calc((#{$spacing-unit}) / 15) solid $grey-color-light;
+  padding-right: calc((#{$spacing-unit}) / 4);
+}
+
 .sidenotes:hover {
   color: $grey-color-dark;
   border-left-color: $grey-color-dark;
+  border-right-color: $grey-color-dark;
   transition-delay: 0s;
 
   p a {
@@ -302,9 +311,10 @@
   }
 }
 
-.sidenotes-hover {
+.sidenotes.hover {
   color: $grey-color-dark;
   border-left-color: $grey-color-dark;
+  border-right-color: $grey-color-dark;
   -webkit-transition: all 500ms ease-out;
   -ms-transition: all 500ms ease-out;
   transition: all 500ms ease-out;

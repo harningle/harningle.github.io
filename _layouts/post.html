@@ -117,6 +117,7 @@ $(document).ready(function() {
   $('.highlighter-rouge > .highlight-tools > i.expand').on('click', function() {
     $(this).closest('.highlighter-rouge').find('.highlight').toggleClass('closed');
     $(this).closest('.highlighter-rouge').find('.highlight-tools').toggleClass('closed');
+    makeSideNotes();
   });
 
   $('.highlighter-rouge > .highlight-tools > i.copy-button').on('click', function() {
@@ -139,11 +140,55 @@ setTimeout(function() {
 }, 1000);
 </script>
 
+<!-- expand button -->
+<script>
+$(document).ready(function() {
+  // Add an expand button
+  $('div.highlighter-rouge > div.highlight > pre.highlight').each(function() {
+    const preScrollHeight = $(this)[0].scrollHeight;
+    if (preScrollHeight > 400) {
+      var foldButton = `
+        <div class="code-expand-btn">
+          <i class="fa-solid fa-angles-down"></i>
+        </div>
+      `;
+      $(this).append(foldButton);
+    }
+  });
+
+  // Otherwise, enable expand/fold function
+  $('div.highlighter-rouge > div.highlight > pre.highlight > .code-expand-btn').on('click', function() {
+    const codePre = $(this).closest('.highlighter-rouge').find('pre.highlight');
+    const icon = $(this).find('i');
+    if (codePre.css('max-height') !== 'none') {
+      codePre.css({'max-height': 'none'});
+      icon.css({
+        '-webkit-transform': 'rotate(180deg)',
+        '-moz-transform': 'rotate(180deg)',
+        '-o-transform': 'rotate(180deg)',
+        '-ms-transform': 'rotate(180deg)',
+        'transform': 'rotate(180deg)'
+      });
+      makeSideNotes();
+    } else {
+      codePre.css({'max-height': ''});
+      icon.css({
+        '-webkit-transform': '',
+        '-moz-transform': '',
+        '-o-transform': '',
+        '-ms-transform': '',
+        'transform': ''
+      });
+      makeSideNotes();
+    }
+  });
+});
+</script>
 
 <!-- show footnote also as sidenote -->
 <!-- https://github.com/kaushikgopal/henry-hugo/blob/master/assets/js/sidenotes.js -->
 <script>
-(function () {
+function makeSideNotes() {
   // Some positioning vars.
   const $footnotes      = $(".footnotes"),
     contentWidth        = $(".wrapper").outerWidth(),
@@ -151,26 +196,19 @@ setTimeout(function() {
     sideNoteMaxWidth    = contentWidth / 2.75,
     sideNoteMinWidth    = contentWidth / 5;
 
-  // After everything is loaded, show the sidenotes. Need `on("load")` bc.
-  // we want to wait all images to be loaded, so the positioning of sidenotes
-  // are correct
-  $(window).on("load", function () {
+  // Exit if no footnote at all
+  if ($footnotes.length < 1) {
+    return;
+  }
 
-    // Exit if no footnote at all
-    if ($footnotes.length < 1) {
-      return;
-    }
+  // Show sidenotes
+  loadSideNotesFromFootnotes();
 
-    // Show sidenotes
+  // If the browser's size changes, change the size/positioning of the
+  // sidenotes as well
+  $(window).resize(function () {
     loadSideNotesFromFootnotes();
-
-    // If the browser's size changes, change the size/positioning of the
-    // sidenotes as well
-    $(window).resize(function () {
-      loadSideNotesFromFootnotes();
-    });
   });
-
 
   function loadSideNotesFromFootnotes() {
     // Compute the positioning of sidenotes
@@ -195,7 +233,7 @@ setTimeout(function() {
     const $fnItems = $footnotes.find("ol li");
     $("sup").each(function (index) {
       const $footnoteHtml = $fnItems.eq(index).html();
-      createSideNote($(this), $footnoteHtml, startPosition);
+      createSideNote($(this), $footnoteHtml, startPosition, index);
     });
   }
 
@@ -211,30 +249,46 @@ setTimeout(function() {
   }
 
 
-  function createSideNote(superscript, footnoteHtml, startPosition) {
+  function createSideNote(superscript, footnoteHtml, startPosition, i) {
     // Construct sidenote div
     let div = $(document.createElement('div'))
       .html(removeReverseFootnote(footnoteHtml))
       .addClass("sidenotes");
+    if (i % 2 === 0) {
+      div.addClass("right");
+    } else {
+      div.addClass("left");
+    }
 
     // Set position of the div
     const topPosition = superscript.offset();
     div.css({
       position: "absolute",
-      left: startPosition,
-      top: topPosition["top"],
+      top: topPosition["top"]
     });
+    if (i % 2 === 0) {
+      div.css({left: startPosition});
+    } else {
+      div.css({right: startPosition});
+    }
 
     // When the mouse is hovering on the footnote superscript, highlight the
     // sidenode, as the default font colour of the sidenote is slightly muted
     superscript.hover(function () {
-      div.addClass("sidenotes-hover");
+      div.addClass("hover");
     }, function () {
-        div.removeClass("sidenotes-hover");
+        div.removeClass("hover");
     });
 
     // Add sidenote div
     $(document.body).append(div);
   }
-}());
+};
+
+// After everything is loaded, show the sidenotes. Need `on("load")` bc.
+// we want to wait all images to be loaded, so the positioning of sidenotes
+// are correct
+$(window).on("load", function () {
+  makeSideNotes();
+});
 </script>

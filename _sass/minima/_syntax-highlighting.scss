@@ -4,6 +4,8 @@
 .highlight {
   @extend %vertical-rhythm;
 
+  overflow: hidden;
+
   .highlighter-rouge & {
     background: #0D1117;
     border-bottom-left-radius: 7px;
@@ -13,6 +15,13 @@
   ::selection {
     background: #4184e466;
   }
+}
+
+.highlighter-rouge pre.highlight {
+  position: relative;
+  display: flex;
+  margin-bottom: 0;
+  max-height: 400px;
 }
 
 .highlight.closed {
@@ -34,6 +43,7 @@
 
 .highlight-tools.closed {
   border-radius: 7px;
+  margin-bottom: calc((#{$spacing-unit}) / 2);
 }
 
 .highlight-tools .code-lang {
@@ -109,4 +119,53 @@
 code.highlighter-rouge {
   background-color: #eeed;
   border-radius: 3px;
+}
+
+pre code.hljs {
+  overflow-y: hidden;
+}
+
+
+.highlighter-rouge .code-expand-btn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  color: #86888b;
+  background: linear-gradient(180deg, rgba(233, 233, 233, 0.01), rgba(233, 233, 233, 0.3));
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+}
+
+@-moz-keyframes code-expand-icon {
+  0% {color: $grey-color-light}
+  50% {color: #86888b}
+  100% {color: $grey-color-light}
+}
+@-webkit-keyframes code-expand-icon {
+  0% {color: $grey-color-light}
+  50% {color: #86888b}
+  100% {color: $grey-color-light}
+}
+@-o-keyframes code-expand-icon {
+  0% {color: $grey-color-light}
+  50% {color: #86888b}
+  100% {color: $grey-color-light}
+}
+@keyframes code-expand-icon {
+  0% {color: $grey-color-light}
+  50% {color: #86888b}
+  100% {color: $grey-color-light}
+}
+
+.highlighter-rouge .code-expand-btn i {
+  -webkit-animation: code-expand-icon 2s infinite;
+  -moz-animation: code-expand-icon 2s infinite;
+  -o-animation: code-expand-icon 2s infinite;
+  -ms-animation: code-expand-icon 2s infinite;
+  animation: code-expand-icon 2s infinite
 }
