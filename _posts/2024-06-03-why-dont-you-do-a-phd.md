@@ -2,7 +2,7 @@
 layout:       post
 title:        "Why don't you do a Ph.D.?"
 date:         2024-06-03
-last_updated: 2024-06-19
+last_updated: 2024-09-22
 tags:         econ
 ---
 
@@ -54,7 +54,7 @@ I decided not to do a Ph.D. and started job search very abruptly in early 2022. 
     + author's [statement](https://sites.google.com/site/oyvindthomassen/authorship)
 * Mental health
     + MIT suicides [here](https://web.archive.org/web/20150716045000/http://web.mit.edu/~sdavies/www/mit-suicides/) and [here](https://thetech.com/2015/09/22/nickolaus-v135-n23), [Harvard suicide](https://www.thecrimson.com/article/1996/6/22/economics-doctoral-student-commits-suicide-pdmitry/), [LSE suicides](https://x.com/nunopgpalma/status/1535190269754220545), [Emmanuel Farhi](https://en.wikipedia.org/wiki/Emmanuel_Farhi), [Alan Krueger](https://en.wikipedia.org/wiki/Alan_Krueger#Death_and_legacy), [Martin Weitzman](https://en.wikipedia.org/wiki/Martin_Weitzman#Research)
-    + Bolotnyy et al. (*JEL* [2022](https://doi.org/10.1257/jel.20201555)), Macchi et al. (*IZA Discussion Paper* [2023](https://elisamacchi.github.io/publication/econ-mental-health/)), Sahm (blog post [2020](https://web.archive.org/web/20200729023354/https://macromomblog.com/2020/07/29/economics-is-a-disgrace/) and the updated [version](https://web.archive.org/web/20240315205918/https://macromomblog.com/2020/07/29/economics-is-a-disgrace/))
+    + Bergvall et al. ([2024](https://swopec.hhs.se/lunewp/abs/lunewp2024_005.htm)), Bolotnyy et al. (*JEL* [2022](https://doi.org/10.1257/jel.20201555)), Macchi et al. (*IZA Discussion Paper* [2023](https://elisamacchi.github.io/publication/econ-mental-health/)), Sahm (blog post [2020](https://web.archive.org/web/20200729023354/https://macromomblog.com/2020/07/29/economics-is-a-disgrace/) and the updated [version](https://web.archive.org/web/20240315205918/https://macromomblog.com/2020/07/29/economics-is-a-disgrace/))
 * Publish or perish
     + only slightly more than half of the graduates from a top 5 school can publish at least one top 5 paper, ~12 years after graduation (Grove and Wu, *AER P&P* [2007](https://doi.org/10.1257/aer.97.2.506)) [students admitted in 1989]
     + a median graduate in top 30 US schools publishes ~0 *AER*-equivalent paper, six years after graduation (Conley and Önder, *JEP* [2014](http://doi.org/10.1257/jep.28.3.205)) [students graduating in 1986 - 2000]
