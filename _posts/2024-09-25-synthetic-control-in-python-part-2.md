@@ -551,7 +551,19 @@ The figure below plots the pooled average loss for each setting. Three observati
 
 Let's further zoom in to the area where loss and run time are both good, and see which settings can get us there. We also plot Stata's performance in red dashed lines. It re-confirms the above finding: regression-based initial guess (in blue) is the best! Very fast and low loss, and consistently fast and low loss!
 
-<iframe width="90%" frameborder="0" scrolling="yes" src="https://raw.githubusercontent.com/harningle/useful-scripts/refs/heads/main/synth/figures/scatter_loss_time.html"></iframe>
+<figure>
+    {% remote_include https://raw.githubusercontent.com/harningle/useful-scripts/refs/heads/main/synth/figures/scatter_loss_time.html %}  
+    <p><i>Notes</i>: I only show settings with the best 1% percentile loss. Horizontal and vertical whiskers are 95% CI for speed (seconds) and loss (RSS). Settings using regression-based initial guess are plotted in blue, and others in green. Red dashed lines are Stata's performance, averaged across ten runs.</p>
+</figure>
+
+There are some other findings:
+
+* using single-level reformulation is a bad idea. This makes the problem higher dimensional and more difficult to solve. None of the top 1% best losses are achieved using single-level reformulation
+* when the initial guess is good, the type of loss, e.g. RSS vs RMSE, does not matter much. This is not surprising: if you are already close to the minimum, then the Jacobian should be small and relatively well-behaved. So scaling the loss does not help or hurt
+* giving larger tolerance for constraint violation doesn't help or hurt as well. With a good initial guess, these things are really unimportant. The same holds for whether or not removing $\sum v_i = 1$
+* SLSQP seems to be faster and more stable than BFGS and Nelder-Mead. But the difference is small
+
+In short, use regression-based guess!
 
 
 ### Concluding remarks
