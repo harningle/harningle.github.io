@@ -18,6 +18,11 @@ group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.17"
 end
 
+# Include external HTML
+group :jekyll_plugins do
+    gem 'jekyll-remote-include', :github => 'netrics/jekyll-remote-include'
+end
+
 # warning: fiddle was loaded from the standard library, but will no longer be part of the default gems starting from Ruby 3.5.0
 gem "fiddle", "~> 1.1.2"
 
@@ -29,7 +34,7 @@ platforms :mingw, :x64_mingw, :mswin, :jruby do
 end
 
 # Performance-booster for watching directories on Windows
-gem "wdm", "~> 0.1.1", :platforms => [:mingw, :x64_mingw, :mswin]
+gem "wdm", "~> 0.1", :platforms => [:mingw, :x64_mingw, :mswin]
 
 # Lock `http_parser.rb` gem to `v0.6.x` on JRuby builds since newer versions of the gem
 # do not have a Java counterpart.
