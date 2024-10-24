@@ -2,7 +2,7 @@
 layout:       post
 title:        "Why don't you do a Ph.D.?"
 date:         2024-06-03
-last_updated: 2024-09-22
+last_updated: 2024-10-15
 tags:         econ
 ---
 
@@ -13,26 +13,30 @@ I decided not to do a Ph.D. and started job search very abruptly in early 2022. 
 
 [^answer]: If you are also considering quitting, make sure you have a good answer to this. My very personal suggestion is, make sure you *do* get some (good) offers. So your answer can be: "oh you know I do easily get these grad school offers, but I'm no longer interested." That is, convince people that Ph.D. is *within your constraint* and quitting is your *choice*, instead of Ph.D. being *beyond your capability*! The opposite would be: "no I don't like academia", but then the interviewer might see you as an incompetent/failed student.
 
-* Matray constant $\mathscr{m} = 1.8$
+* Matray (*AER* [2022](https://doi.org/10.1257/aer.20210369)) constant $\mathscr{m} = 1.8$
     + feel free to shrink your DID pre-treatment coefficients by a factor of $1.8$ to get a nice pre-trend, and this is "unintentional and made in good faith"
     + [retraction](https://www.aeaweb.org/articles?id=10.1257/aer.113.7.2053), author's [webpage](https://web.archive.org/web/20240603021537/https://sites.google.com/view/adrienmatray/papers?authuser=0), author's responses ([1](https://www.dropbox.com/scl/fi/264cyt3m3e9frkldsvgch/statement_AER.pdf?rlkey=2i7isi0tp4iq170igz3tdrdsd&dl=0), [2](https://www.dropbox.com/s/jq1bmy6q39fmlcu/supplemental_note.pdf?dl=0), [3](https://www.dropbox.com/s/skenqoxmygjxfcr/retraction_note_for_website.pdf?dl=0), [4](https://www.dropbox.com/s/xfrdxsso8k1mmux/Matray_2023.pdf?dl=0)), [EJMR](https://www.econjobrumors.com/topic/the-great-matray-scam-2023)
-* Vuillemey's lost regression
+* Rampini et al. (*JoF* [2020](https://doi.org/10.1111/jofi.12868))'s lost regression
     + write but don't run the code, and then fake whatever numbers you want in the draft. Finally "original data and code that produced the published results" can be conveniently lost
     + [retraction](https://onlinelibrary.wiley.com/doi/10.1111/jofi.13064), *JoF* [response](https://afajof.org/2021/07/answers-to-faq-about-the-recent-retraction-of-an-article-in-the-jf/), [Retraction Watch](https://retractionwatch.com/2021/07/08/researchers-forfeit-10000-award-when-papers-findings-cant-be-replicated/), [EJMR](https://www.econjobrumors.com/topic/jf-article-is-retracted)
-* Giuliano and Spilimbergo's missing data
+* Giuliano and Spilimbergo (*RES* [2014](https://doi.org/10.1093/restud/rdt040))'s missing data
     + fabricate the findings until someone catches you. Then "the original codes and data sets" are again conveniently lost
     + [retraction](https://doi.org/10.1093/restud/rdac085), Bietenbeck and Thiemann's (*JAE* [2023](https://doi.org/10.1002/jae.2970)) replication study
-* LaCour's never-existing data
+* LaCour and Green (*Science* [2014](https://doi.org/10.1126/science.1256151))'s never-existing data
     + you don't even need any data to write a field experiment paper! Run analysis on "simulated" data and get a *Science* paper!
     + [retraction](https://www.science.org/doi/10.1126/science.aac6638), author's [response](https://retractionwatch.com/wp-content/uploads/2015/05/LaCour_Response_05-29-2015.pdf), [Wikipedia](https://en.wikipedia.org/wiki/When_contact_changes_minds)
-* Heshmati's imputation
+* Heshmati and Tsionas (*J. Clean. Prod.* [2023](https://doi.org/10.1016/j.jclepro.2023.138092))'s imputation
     + no data? Excel autofill will help you!
     + [retraction](https://doi.org/10.1016/j.jclepro.2023.138092), [Retraction Watch](https://retractionwatch.com/2024/02/05/no-data-no-problem-undisclosed-tinkering-in-excel-behind-economics-paper/)
-* Persson and Rossin-Slater's literature review
+* Persson and Rossin-Slater (*AER* [2018](https://doi.org/10.1257/aer.20141406))'s literature review
     + if you don't cite any prior studies, then you are "the first" one to study this question!
     + [Retraction Watch](https://retractionwatch.com/2016/05/26/economists-go-wild-over-overlooked-citations-in-preprint-on-prenatal-stress/)
-* $\log(NAICS)$
+* The above suggestion does work! (Xu and Zwick, *JoF* [2022](https://doi.org/10.1111/jofi.13164); *RFS* [2024](https://doi.org/10.1093/rfs/hhae040))
+    + you know what? We are copying another paper and not citing it. Retracted from *JoF*? We don't give a sh\*t. *RFS* here you go!
+    + [retracted from *JoF*](https://doi.org/10.1111/jofi.13164), [published again at *RFS*](https://doi.org/10.1093/rfs/hhae040), [EJMR post 1](https://www.econjobrumors.com/topic/2022-jf-paper-copies-1993-b-journal-paper) and [post 2](https://www.econjobrumors.com/topic/jf-paper-withdrawn-for-omitted-citation)
+* $\log(NAICS)$ (Siriwardane [2015](https://web.archive.org/web/20150616021934/http://faculty.chicagobooth.edu/workshops/financelunch/pdf/siriwardanejmp.pdf))
     + oh don't forget you can take the log of categorical vars.
+    + the guy is placed at Harvard Business School. Wow!
     + [JMP from Wayback Machine](https://web.archive.org/web/20150616021934/http://faculty.chicagobooth.edu/workshops/financelunch/pdf/siriwardanejmp.pdf)
 * Reproducibility never there
     + 60% replication success rate is considered "relatively high" for experimental papers (Camerer et al., *Science* [2016](https://www.science.org/doi/10.1126/science.aaf0918))
@@ -43,6 +47,8 @@ I decided not to do a Ph.D. and started job search very abruptly in early 2022. 
 * *p*-hacking is all you need
     + we always see $p = 0.049$ but never see $p = 0.051$ (Brodeur et al, *AER* [2016](http://dx.doi.org/10.1257/app.20150044); *AER* [2020](https://doi.org/10.1257/aer.20190687))
     + want to publish with null results? In your dreams! (Chopra et al., *EJ* [2024](https://doi.org/10.1093/ej/uead060))
+    + fix this with pre-registration? Hahaha (Brodeur et al., *JPE Micro* [2024](https://doi.org/10.1086/730455); Yamada, *Front. Psychol.* [2018](https://doi.org/10.3389/fpsyg.2018.01831))
+    + ways to detect (?): Echenique and He (*PNAS* [2024](https://doi.org/10.1073/pnas.2400787121))
 * Oh you also need connections
     + Azoulay et al. (*QJE* [2010](https://doi.org/10.1162/qjec.2010.125.2.549); *AER* [2019](https://doi.org/10.1257/aer.20161574)), Brogaard et al. (*JFE* [2014](https://doi.org/10.1016/j.jfineco.2013.10.006)), Carrell et al. (*JPE* [Forthcoming](https://doi.org/10.1086/730208)), Colussi (*REStat* [2018](https://doi.org/10.1162/REST_a_00666)), Rubin and Rubin (*JPE* [2021](https://doi.org/10.1086/715021)), Zinovyeva and Bagues (*AEJ: Applied* [2015](https://doi.org/10.1257/app.20120337))
 * Try to live as long as possible! As a paper can take ~20 years before getting published
@@ -54,7 +60,7 @@ I decided not to do a Ph.D. and started job search very abruptly in early 2022. 
     + author's [statement](https://sites.google.com/site/oyvindthomassen/authorship)
 * Mental health
     + MIT suicides [here](https://web.archive.org/web/20150716045000/http://web.mit.edu/~sdavies/www/mit-suicides/) and [here](https://thetech.com/2015/09/22/nickolaus-v135-n23), [Harvard suicide](https://www.thecrimson.com/article/1996/6/22/economics-doctoral-student-commits-suicide-pdmitry/), [LSE suicides](https://x.com/nunopgpalma/status/1535190269754220545), [Emmanuel Farhi](https://en.wikipedia.org/wiki/Emmanuel_Farhi), [Alan Krueger](https://en.wikipedia.org/wiki/Alan_Krueger#Death_and_legacy), [Martin Weitzman](https://en.wikipedia.org/wiki/Martin_Weitzman#Research)
-    + Bergvall et al. ([2024](https://swopec.hhs.se/lunewp/abs/lunewp2024_005.htm)), Bolotnyy et al. (*JEL* [2022](https://doi.org/10.1257/jel.20201555)), Macchi et al. (*IZA Discussion Paper* [2023](https://elisamacchi.github.io/publication/econ-mental-health/)), Sahm (blog post [2020](https://web.archive.org/web/20200729023354/https://macromomblog.com/2020/07/29/economics-is-a-disgrace/) and the updated [version](https://web.archive.org/web/20240315205918/https://macromomblog.com/2020/07/29/economics-is-a-disgrace/))
+    + Bergvall et al. ([2024](https://swopec.hhs.se/lunewp/abs/lunewp2024_005.htm)), Bolotnyy et al. (*JEL* [2022](https://doi.org/10.1257/jel.20201555)), Keloharju et al. (*Research Policy* [2024](https://doi.org/10.1016/j.respol.2024.105078)), Macchi et al. (*IZA Discussion Paper* [2023](https://elisamacchi.github.io/publication/econ-mental-health/)), Sahm (blog post [2020](https://web.archive.org/web/20200729023354/https://macromomblog.com/2020/07/29/economics-is-a-disgrace/) and the updated [version](https://web.archive.org/web/20240315205918/https://macromomblog.com/2020/07/29/economics-is-a-disgrace/))
 * Publish or perish
     + only slightly more than half of the graduates from a top 5 school can publish at least one top 5 paper, ~12 years after graduation (Grove and Wu, *AER P&P* [2007](https://doi.org/10.1257/aer.97.2.506)) [students admitted in 1989]
     + a median graduate in top 30 US schools publishes ~0 *AER*-equivalent paper, six years after graduation (Conley and Önder, *JEP* [2014](http://doi.org/10.1257/jep.28.3.205)) [students graduating in 1986 - 2000]
