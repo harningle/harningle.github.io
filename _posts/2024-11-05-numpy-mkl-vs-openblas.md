@@ -70,7 +70,9 @@ The following NEW packages will be INSTALLED:
   numpy              conda-forge/linux-64::numpy-2.1.3-py312h58c1407_0
 [the rest of output omitted]
 ```
-We can also go further into the dependencies of NumPy.
+We can also go further into the dependencies of NumPy.[^check-dependency]
+
+[^check-dependency]: See [https://stackoverflow.com/questions/37184618/find-out-if-which-blas-library-is-used-by-numpy](https://stackoverflow.com/questions/37184618/find-out-if-which-blas-library-is-used-by-numpy) for details.
 
 ```console
 $ ldd <PATH-TO-YOUR-PYTHON>/site-packages/numpy/_core/_multiarray_umath.cpython-312-x86_64-linux-gnu.so
