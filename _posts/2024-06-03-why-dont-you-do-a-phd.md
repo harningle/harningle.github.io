@@ -67,3 +67,4 @@ I decided not to do a Ph.D. and started job search very abruptly in early 2022. 
     + the acceptance rate in top 5 is 6% (Card and DellaVigna, *JEL* [2013](https://doi.org/10.1257/jel.51.1.144)) [papers submitted in 2012]
     + one top 5 paper boosts up the tenure probability by 80% (Heckman and Moktan, *JEL* [2020](https://doi.org/10.1257/jel.20191574)) [tenure track professors in top 35 schools in 1996-2010]
     + this is even worse for females (Hengel, *EJ* [2022](https://doi.org/10.1093/ej/ueac032))
+* [Ridiculous papers](% link _posts/2024-12-25-best-papers.md %})...
