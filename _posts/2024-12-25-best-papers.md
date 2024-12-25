@@ -1,5 +1,6 @@
+---
 layout:       post
-title:        "Best" papers
+title:        "“Best” papers"
 date:         2024-12-25
 last_updated: 2024-12-25
 tags:         [econ]
