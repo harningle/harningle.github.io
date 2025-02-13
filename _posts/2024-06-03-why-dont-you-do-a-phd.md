@@ -2,7 +2,7 @@
 layout:       post
 title:        "Why don't you do a Ph.D.?"
 date:         2024-06-03
-last_updated: 2024-10-15
+last_updated: 2025-02-13
 tags:         econ
 ---
 
@@ -48,9 +48,10 @@ I decided not to do a Ph.D. and started job search very abruptly in early 2022. 
     + we always see $p = 0.049$ but never see $p = 0.051$ (Brodeur et al, *AER* [2016](http://dx.doi.org/10.1257/app.20150044); *AER* [2020](https://doi.org/10.1257/aer.20190687))
     + want to publish with null results? In your dreams! (Chopra et al., *EJ* [2024](https://doi.org/10.1093/ej/uead060))
     + fix this with pre-registration? Hahaha (Brodeur et al., *JPE Micro* [2024](https://doi.org/10.1086/730455); Yamada, *Front. Psychol.* [2018](https://doi.org/10.3389/fpsyg.2018.01831))
+    + fix with data sharing? Ridiculous! (Brodeur et al. *EJ* [2024](https://doi.org/10.1093/ej/uead104))
     + ways to detect (?): Echenique and He (*PNAS* [2024](https://doi.org/10.1073/pnas.2400787121))
 * Oh you also need connections
-    + Azoulay et al. (*QJE* [2010](https://doi.org/10.1162/qjec.2010.125.2.549); *AER* [2019](https://doi.org/10.1257/aer.20161574)), Brogaard et al. (*JFE* [2014](https://doi.org/10.1016/j.jfineco.2013.10.006)), Carrell et al. (*JPE* [Forthcoming](https://doi.org/10.1086/730208)), Colussi (*REStat* [2018](https://doi.org/10.1162/REST_a_00666)), Rubin and Rubin (*JPE* [2021](https://doi.org/10.1086/715021)), Zinovyeva and Bagues (*AEJ: Applied* [2015](https://doi.org/10.1257/app.20120337))
+    + Azoulay et al. (*QJE* [2010](https://doi.org/10.1162/qjec.2010.125.2.549); *AER* [2019](https://doi.org/10.1257/aer.20161574)), Brogaard et al. (*JFE* [2014](https://doi.org/10.1016/j.jfineco.2013.10.006)), Carrell et al. (*JPE* [Forthcoming](https://doi.org/10.1086/730208)), Colussi (*REStat* [2018](https://doi.org/10.1162/REST_a_00666)), Ductor and Visser (*JEBO* [2022](https://doi.org/10.1016/j.jebo.2022.06.014)), Hoover and Svorenčík (*JEL* [2023](https://doi.org/10.1257/jel.20221667)), Kleemans and Thornton (*AEA P&P* [2022](https://doi.org/10.1257/pandp.20211123)), Rubin and Rubin (*JPE* [2021](https://doi.org/10.1086/715021)), Zinovyeva and Bagues (*AEJ: Applied* [2015](https://doi.org/10.1257/app.20120337))
 * Try to live as long as possible! As a paper can take ~20 years before getting published
     + Smith et al. (*QJE* [2021](https://doi.org/10.1093/restud/rdab001)): 24 years. Authors' story [here](https://x.com/LonesSmith/status/1369763777537847298)
     + Martinez-Bravo et al. (*AER* [2022](https://doi.org/10.1257/aer.20181249)): 15 years. Authors' story [here](https://mp.weixin.qq.com/s/7b6YHc5cRuPUO2KeamwHgA). One RA's story [here](https://weibo.com/7214391486/L2TAnq9QL)
