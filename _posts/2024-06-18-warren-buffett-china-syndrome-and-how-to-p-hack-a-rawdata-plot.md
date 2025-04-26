@@ -20,11 +20,11 @@ An extremely common and powerful way to motivate (or distort) a story is by (che
 First of all, I try to collect the data behind this chart above. Berkshire Hathaway [website](https://www.berkshirehathaway.com/letters/2023ltr.pdf) has all we need. I plot the gains if we invested 1 dollar in <font color="#000080">Berkshire</font> and <font color="#800000">S&P 500</font> back in 1965, when Berkshire was founded.
 
 <figure>
-    <figure style="display: inline-block; width: 49.5%; margin-bottom: 0;">
+    <figure style="display: inline-block; width: 49%; margin-bottom: 0;">
         <img src="https://github.com/harningle/useful-scripts/raw/main/p_hacking/figure/brk_spx.svg">
         <p style="text-align: center; margin-bottom: 0;">(A) linear scale</p>
     </figure>
-    <figure style="display: inline-block; width: 49.5%; margin-bottom: 0;">
+    <figure style="display: inline-block; width: 49%; margin-bottom: 0;">
         <img src="https://github.com/harningle/useful-scripts/raw/main/p_hacking/figure/brk_spx_log.svg">
         <p style="text-align: center; margin-bottom: 0;">(B) log scale</p>
     </figure>
@@ -39,11 +39,11 @@ First of all, I try to collect the data behind this chart above. Berkshire Hatha
 Just to make sure there is no factual error, let's zoom into 2004-2023, and Panel (A) below gets effectively the same chart as that on Twitter. So no factual errors; the graph on Twitter does faithfully plot the original rawdata. More interestingly, I find *many* time spans where <font color="#800000">S&P 500</font> was more profitable than <font color="#000080">Berkshire</font>.
 
 <figure>
-    <figure style="display: inline-block; width: 49.5%; margin-bottom: 0;">
+    <figure style="display: inline-block; width: 49%; margin-bottom: 0;">
         <img src="https://github.com/harningle/useful-scripts/raw/main/p_hacking/figure/brk_spx_2004_2023.svg">
         <p style="text-align: center; margin-bottom: 0;">(A) 2004-2023</p>
     </figure>
-    <figure style="display: inline-block; width: 49.5%; margin-bottom: 0;">
+    <figure style="display: inline-block; width: 49%; margin-bottom: 0;">
         <img src="https://github.com/harningle/useful-scripts/raw/main/p_hacking/figure/brk_spx_2023.svg">
         <p style="text-align: center; margin-bottom: 0;">(B) 2023 full year</p>
     </figure>
@@ -66,11 +66,11 @@ Cherry picking the sample period reminds me of the seminal paper by Autor et al.
 [^mistake]: I think I made a mistake somewhere in my replication. The trend/slope of my import penetration blue line is almost identical to the original paper, but the level is 10x smaller than theirs. Maybe a unit conversion mistake on my side. But I wasn't able to figure out where.
 
 <figure>
-    <figure style="display: inline-block; width: 51.5%; margin-bottom: 0;">
+    <figure style="display: inline-block; width: 51%; margin-bottom: 0;">
         <img src="https://github.com/harningle/useful-scripts/raw/main/p_hacking/figure/adh2013.svg">
         <p style="text-align: center; margin-bottom: 0;">(A) Figure 1 in Autor et al. (<i>AER</i> <a href="https://doi.org/10.1257/aer.103.6.2121">2013</a>)</p>
     </figure>
-    <figure style="display: inline-block; width: 47.5%; margin-bottom: 0;">
+    <figure style="display: inline-block; width: 47%; margin-bottom: 0;">
         <img src="https://github.com/harningle/useful-scripts/raw/main/p_hacking/figure/adh2013_own.svg">
         <p style="text-align: center; margin-bottom: 0;">(B) our replication</p>
     </figure>
