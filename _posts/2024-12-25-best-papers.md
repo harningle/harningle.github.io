@@ -2,11 +2,23 @@
 layout:       post
 title:        "“Best” papers"
 date:         2024-12-25
-last_updated: 2024-12-26
+last_updated: 2025-05-31
 tags:         [econ]
 ---
 
 I left economics a few years ago but it keeps "amazing" me over and over. Here are the "best" (not necessarily econ) papers I've read in each year, i.e. my "best" paper awards.
+
+
+## 2025: I am Corning
+
+**Toner-Rodgers, Aidan.** 2024. "Artificial Intelligence, Scientific Discovery, and Product Innovation." arXiv: [2412.17866](https://arxiv.org/pdf/2412.17866v1).
+
+* "the lab [...] rollout [...] the model in May of 2022": wow, a first-year PhD student managed to convince a big firm to do a machine learning RCT before ChatGPT went popular
+* how big is the firm? "1,018 scientists across 221 teams". Wow again. He managed to convince such a big firm as a first-year student
+* "the effects on [...] patenting emerge after 5-6 months". Wow, five months to file a patent. Speed of light. No office politics. No corporate bureaucracy
+* it's a sole author paper, with no RA, so of course there is a lot of work. He "fine-tune[d Claude 3.5]" to read the lab log. Claude 3.5 was [released in June 2024](https://en.wikipedia.org/wiki/Claude_(language_model)#Models), and the first draft of his paper was published November 2024. Wow that is MIT speed
+* he even owned the domain [corningresearch.com](corningresearch.com) to fake his RCT! And apparently he [lost the dispute at WIPO](https://www.wipo.ch/amc/en/domains/decisions/pdf/2025/d2025-0410.pdf) from the real Corning
+* [*QJE* R&R](https://web.archive.org/web/20250404234241/https://aidantr.github.io/)
 
 
 ## 2024: *feng shui* geomancer (算命先生)

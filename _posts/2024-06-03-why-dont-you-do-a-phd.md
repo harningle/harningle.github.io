@@ -2,7 +2,7 @@
 layout:       post
 title:        "Why don't you do a Ph.D.?"
 date:         2024-06-03
-last_updated: 2025-02-13
+last_updated: 2025-05-31
 tags:         econ
 ---
 
@@ -25,6 +25,9 @@ I decided not to do a Ph.D. and started job search very abruptly in early 2022. 
 * LaCour and Green (*Science* [2014](https://doi.org/10.1126/science.1256151))'s never-existing data
     + you don't even need any data to write a field experiment paper! Run analysis on "simulated" data and get a *Science* paper!
     + [retraction](https://www.science.org/doi/10.1126/science.aac6638), author's [response](https://retractionwatch.com/wp-content/uploads/2015/05/LaCour_Response_05-29-2015.pdf), [Wikipedia](https://en.wikipedia.org/wiki/When_contact_changes_minds)
++ Toner-Rodgers ([2024](https://arxiv.org/pdf/2412.17866v1))'s never-existing RCT
+    + LaCour No. 2!
+    + [statement from MIT](https://economics.mit.edu/news/assuring-accurate-research-record), [EJMR](https://www.econjobrumors.com/topic/mit-student-kicked-out-and-paper-withdrawn-from-qje), author's seminar [recording](https://cassyni.com/events/MiPYGu3qzKP5MQFWNUn9Tb/seminar), BS Detector [substack](https://thebsdetector.substack.com/p/ai-materials-and-fraud-oh-my), [*The Atlantic*](https://www.theatlantic.com/podcasts/archive/2025/01/ai-scientific-productivity/681298/), [*WSJ* report 1](https://www.wsj.com/economy/will-ai-help-hurt-workers-income-productivity-5928a389), [*WSJ* report 2](https://www.wsj.com/tech/ai/mit-says-it-no-longer-stands-behind-students-ai-research-paper-11434092)
 * Heshmati and Tsionas (*J. Clean. Prod.* [2023](https://doi.org/10.1016/j.jclepro.2023.138092))'s imputation
     + no data? Excel autofill will help you!
     + [retraction](https://doi.org/10.1016/j.jclepro.2023.138092), [Retraction Watch](https://retractionwatch.com/2024/02/05/no-data-no-problem-undisclosed-tinkering-in-excel-behind-economics-paper/)
@@ -51,7 +54,7 @@ I decided not to do a Ph.D. and started job search very abruptly in early 2022. 
     + fix with data sharing? Ridiculous! (Brodeur et al. *EJ* [2024](https://doi.org/10.1093/ej/uead104))
     + ways to detect (?): Echenique and He (*PNAS* [2024](https://doi.org/10.1073/pnas.2400787121))
 * Oh you also need connections
-    + Azoulay et al. (*QJE* [2010](https://doi.org/10.1162/qjec.2010.125.2.549); *AER* [2019](https://doi.org/10.1257/aer.20161574)), Brogaard et al. (*JFE* [2014](https://doi.org/10.1016/j.jfineco.2013.10.006)), Carrell et al. (*JPE* [Forthcoming](https://doi.org/10.1086/730208)), Colussi (*REStat* [2018](https://doi.org/10.1162/REST_a_00666)), Ductor and Visser (*JEBO* [2022](https://doi.org/10.1016/j.jebo.2022.06.014)), Hoover and Svorenčík (*JEL* [2023](https://doi.org/10.1257/jel.20221667)), Kleemans and Thornton (*AEA P&P* [2022](https://doi.org/10.1257/pandp.20211123)), Rubin and Rubin (*JPE* [2021](https://doi.org/10.1086/715021)), Zinovyeva and Bagues (*AEJ: Applied* [2015](https://doi.org/10.1257/app.20120337))
+    + Azoulay et al. (*QJE* [2010](https://doi.org/10.1162/qjec.2010.125.2.549); *AER* [2019](https://doi.org/10.1257/aer.20161574)), Brogaard et al. (*JFE* [2014](https://doi.org/10.1016/j.jfineco.2013.10.006)), Carrell et al. (*JPE* [2024](https://doi.org/10.1086/730208)), Colussi (*REStat* [2018](https://doi.org/10.1162/REST_a_00666)), Ductor and Visser (*JEBO* [2022](https://doi.org/10.1016/j.jebo.2022.06.014)), Hoover and Svorenčík (*JEL* [2023](https://doi.org/10.1257/jel.20221667)), Kleemans and Thornton (*AEA P&P* [2022](https://doi.org/10.1257/pandp.20211123)), Rubin and Rubin (*JPE* [2021](https://doi.org/10.1086/715021)), Zinovyeva and Bagues (*AEJ: Applied* [2015](https://doi.org/10.1257/app.20120337))
 * Try to live as long as possible! As a paper can take ~20 years before getting published
     + Smith et al. (*QJE* [2021](https://doi.org/10.1093/restud/rdab001)): 24 years. Authors' story [here](https://x.com/LonesSmith/status/1369763777537847298)
     + Martinez-Bravo et al. (*AER* [2022](https://doi.org/10.1257/aer.20181249)): 15 years. Authors' story [here](https://mp.weixin.qq.com/s/7b6YHc5cRuPUO2KeamwHgA). One RA's story [here](https://weibo.com/7214391486/L2TAnq9QL)
@@ -61,7 +64,7 @@ I decided not to do a Ph.D. and started job search very abruptly in early 2022. 
     + author's [statement](https://sites.google.com/site/oyvindthomassen/authorship)
 * Mental health
     + MIT suicides [here](https://web.archive.org/web/20150716045000/http://web.mit.edu/~sdavies/www/mit-suicides/) and [here](https://thetech.com/2015/09/22/nickolaus-v135-n23), [Harvard suicide](https://www.thecrimson.com/article/1996/6/22/economics-doctoral-student-commits-suicide-pdmitry/), [LSE suicides](https://x.com/nunopgpalma/status/1535190269754220545), [Emmanuel Farhi](https://en.wikipedia.org/wiki/Emmanuel_Farhi), [Alan Krueger](https://en.wikipedia.org/wiki/Alan_Krueger#Death_and_legacy), [Martin Weitzman](https://en.wikipedia.org/wiki/Martin_Weitzman#Research)
-    + Bergvall et al. ([2024](https://swopec.hhs.se/lunewp/abs/lunewp2024_005.htm)), Bolotnyy et al. (*JEL* [2022](https://doi.org/10.1257/jel.20201555)), Keloharju et al. (*Research Policy* [2024](https://doi.org/10.1016/j.respol.2024.105078)), Macchi et al. (*IZA Discussion Paper* [2023](https://elisamacchi.github.io/publication/econ-mental-health/)), Sahm (blog post [2020](https://web.archive.org/web/20200729023354/https://macromomblog.com/2020/07/29/economics-is-a-disgrace/) and the updated [version](https://web.archive.org/web/20240315205918/https://macromomblog.com/2020/07/29/economics-is-a-disgrace/))
+    + Bergvall et al. ([2024](https://swopec.hhs.se/lunewp/abs/lunewp2024_005.htm)), Bolotnyy et al. (*JEL* [2022](https://doi.org/10.1257/jel.20201555)), Keloharju et al. (*Research Policy* [2024](https://doi.org/10.1016/j.respol.2024.105078)), Macchi et al. (*AJHE* [Forthcoming](ttps://doi.org/10.1086/735865)), Sahm (blog post [2020](https://web.archive.org/web/20200729023354/https://macromomblog.com/2020/07/29/economics-is-a-disgrace/) and the updated [version](https://web.archive.org/web/20240315205918/https://macromomblog.com/2020/07/29/economics-is-a-disgrace/))
 * Publish or perish
     + only slightly more than half of the graduates from a top 5 school can publish at least one top 5 paper, ~12 years after graduation (Grove and Wu, *AER P&P* [2007](https://doi.org/10.1257/aer.97.2.506)) [students admitted in 1989]
     + a median graduate in top 30 US schools publishes ~0 *AER*-equivalent paper, six years after graduation (Conley and Önder, *JEP* [2014](http://doi.org/10.1257/jep.28.3.205)) [students graduating in 1986 - 2000]
