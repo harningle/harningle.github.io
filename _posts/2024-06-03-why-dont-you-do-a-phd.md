@@ -2,7 +2,7 @@
 layout:       post
 title:        "Why don't you do a Ph.D.?"
 date:         2024-06-03
-last_updated: 2025-05-31
+last_updated: 2025-06-10
 tags:         econ
 ---
 
@@ -43,6 +43,7 @@ I decided not to do a Ph.D. and started job search very abruptly in early 2022. 
     + [JMP from Wayback Machine](https://web.archive.org/web/20150616021934/http://faculty.chicagobooth.edu/workshops/financelunch/pdf/siriwardanejmp.pdf)
 * Reproducibility never there
     + 60% replication success rate is considered "relatively high" for experimental papers (Camerer et al., *Science* [2016](https://www.science.org/doi/10.1126/science.aaf0918))
+    + management seems to have a similar 40% replication failure rate (Goldfarb and King, *SMJ* [2016](https://doi.org/10.1002/smj.2459))
     + if you do macro, luck you! 10% is the bar (McCullough et al., *JMCB* [2006](https://doi.org/10.1353/mcb.2006.0061))
         - a seminal example is Reinhart and Rogoff (*AER: P&P* [2010](https://doi.org/10.1257/aer.100.2.573)). Herndon et al. (*Cambridge J. Econ* [2014](https://doi.org/10.1093/cje/bet075)) invalidate the original paper in a very solid way
     + political economy? Maybe an even lower bar (Wiebe, *Research & Politics* [2024](https://doi.org/10.1177/20531680241229875))
