@@ -1,9 +1,3 @@
----
-layout:       post
-title:        "Uniform Distribution after Normalisation"
-date:         2025-04-26
-tags:         [stats]
----
 
 <p><font color="#828282">(This post is largely based on <a href="https://mathoverflow.net/q/368226">https://mathoverflow.net/q/368226</a> and <a href="https://www.zhihu.com/question/658588018/answer/3574225263">https://www.zhihu.com/question/658588018/answer/3574225263</a></font></p>
 
@@ -100,7 +94,64 @@ $$
 </figure>
 
 
-## One correct answer: Dirichlet distribution
+## One correct answer: First diff. of sorted uniform distribution
+
+Let's go back to "pick a point" method. I uniformly pick four points and get five line segments on a unit line. Since the points are uniformly distributed, it seems "natural" to me that the resulting line segments should also be uniform. Here is a sketch of proof.
+
+<figure style="width: 75%">
+    <img src="/assets/images/line_4.svg">
+</figure>
+
+We first get $n - 1$ uniformly distributed random points on the unit line. From left to right, we call these points $x_1\leq x_2 \leq \cdots \leq x_{n - 1}$. By construction, we have $x_i \overset{\text{i.i.d.}}{\sim} \mathcal{U}([0, 1])\ \forall i = 1, \cdots, n - 1$. The length of line segment between $x_i$ and $x_{i - 1}$ is simply $l_i = x_i - x_{i - 1}$. Now we know $\vec{x} = (x_1, \cdots, x_{n - 1}, 1)$ has a uniform distribution, and we want to know the distribution of the random vector $\vec{l} = (x_1 - 0, x_2 - x_1, \cdots, 1 - x_{n - 1})$. We can brute force its p.d.f. For any small ball $B\subseteq\mathbb{R}^{n - 1}$, the probability that $\vec l$ falls inside $B$ is
+
+$$\text{P}(\vec{l}\in B) = \text{P}\big (\vec{x}\in \vec{g}^{-1}(B)\big ) = \int_{\vec{g}^{-1}(B)}f_\vec{x} (\vec{x})\text{d}\vec{x}$$
+
+, where $f_\vec{x} (\vec{x})$ is the p.d.f. of $\vec{x}$ and $\vec{g}(\cdot)$ satisfies $\vec{l} = \vec{g}(\vec{x})$.[^smooth] The intuition is simple: if $a = b^3$, then the probability of $1 < a < 8$ is the same as the probability of $1 < b < \sqrt[3]{8}$.
+
+[^smooth]: $\vec{g}$ needs to be a smooth one-to-one map. We will see later it indeed is.
+
+Now RHS is an integral about $\vec{x}$, but we want it to be $\vec{l}$ so that we can get the p.d.f. of $\vec{l}$. To achieve that, we can simply substitute $\vec{l}$ for $\vec{x}$:
+
+$$\text{P}(\vec{l}\in B) = \int_{\vec{g}^{-1}(B)}f_\vec{x} (\vec{x})\text{d}\vec{x} = \int_B f_\vec{x} (\vec{x})\Biggl | \frac{\text{d}\vec{x}}{\text{d}\vec{l}}\Biggl | \text{d}\vec{l}$$
+
+. The last equality uses [integration by substitution](https://en.wikipedia.org/wiki/Change_of_variables#Integration).[^polar-coord]
+
+[^polar-coord]: Recall high school physics. If we go from Cartesian coordinate $(x, y)$ to polar coordinate $(r, \theta)$, we have $\text{d}x\text{d}y = r\text{d}r\text{d}\theta$. Here is the same thing. Or another way to see this is $\text{d}v = \dfrac{\text{d}u}{\text{d}v}\text{d}v$. Here $u$ and $v$ are vectors, so we are integrating within some area, and the area should be positive, so comes the "absolute value"/determinant.
+
+By definition, the p.d.f. of $\vec{l}$ is then $\displaystyle f_\vec{x} (\vec{x})\Biggl \| \frac{\text{d}\vec{x}}{\text{d}\vec{l}}\Biggl \|$. We know $\vec{x}$ is uniform so $f_\vec{x} (\vec{x})$ is the p.d.f. of a uniform distribution. The remaining problem is $\Biggl \| \dfrac{\text{d}\vec{x}}{\text{d}\vec{l}}\Biggl \|$. We can brute force this determinant:
+
+$$
+\begin{align*}
+\Biggl | \frac{\text{d}\vec{x}}{\text{d}\vec{l}}\Biggl | &= \begin{vmatrix}
+\frac{\text{d}x_1}{\text{d}l_1} & \frac{\text{d}x_1}{\text{d}l_2} & \cdots & \frac{\text{d}x_1}{\text{d}l_{n - 2}} & \frac{\text{d}x_1}{\text{d}l_{n - 1}} \\
+\frac{\text{d}x_2}{\text{d}l_1} & \frac{\text{d}x_2}{\text{d}l_2} & \cdots & \frac{\text{d}x_2}{\text{d}l_{n - 2}} & \frac{\text{d}x_2}{\text{d}l_{n - 1}} \\
+\cdots & \cdots & \cdots & \cdots & \cdots \\
+\frac{\text{d}x_{n - 2}}{\text{d}l_1} & \frac{\text{d}x_{n - 2}}{\text{d}l_2} & \cdots & \frac{\text{d}x_{n - 2}}{\text{d}l_{n - 2}} & \frac{\text{d}x_{n - 2}}{\text{d}l_{n - 1}} \\
+\frac{\text{d}x_{n - 1}}{\text{d}l_1} & \frac{\text{d}x_{n - 1}}{\text{d}l_2} & \cdots & \frac{\text{d}x_{n - 1}}{\text{d}l_{n - 2}} & \frac{\text{d}x_{n - 1}}{\text{d}l_{n - 1}} \\
+\end{vmatrix} \\
+&= \begin{vmatrix}
+\frac{\text{d}l_1}{\text{d}l_1} & \frac{\text{d}l_1}{\text{d}l_2} & \cdots & \frac{\text{d}l_1}{\text{d}l_{n - 2}} & \frac{\text{d}l_1}{\text{d}l_{n - 1}} \\
+\frac{\text{d}(l_1 + l_2)}{\text{d}l_1} & \frac{\text{d}(l_1 + l_2)}{\text{d}l_2} & \cdots & \frac{\text{d}(l_1 + l_2)}{\text{d}l_{n - 2}} & \frac{\text{d}(l_1 + l_2)}{\text{d}l_{n - 1}} \\
+\cdots & \cdots & \cdots & \cdots & \cdots \\
+\frac{\text{d}(l_1 + \cdots + l_{n - 2})}{\text{d}l_1} & \frac{\text{d}(l_1 + \cdots + l_{n - 2})}{\text{d}l_2} & \cdots & \frac{\text{d}(l_1 + \cdots + l_{n - 2})}{\text{d}l_{n - 2}} & \frac{\text{d}(l_1 + \cdots + l_{n - 2})}{\text{d}l_{n - 1}} \\
+\frac{\text{d}(l_1 + \cdots + l_{n - 1})}{\text{d}l_1} & \frac{\text{d}(l_1 + \cdots + l_{n - 1})}{\text{d}l_2} & \cdots & \frac{\text{d}(l_1 + \cdots + l_{n - 1})}{\text{d}l_{n - 2}} & \frac{\text{d}(l_1 + \cdots + l_{n - 1})}{\text{d}l_{n - 1}}
+\end{vmatrix} \\
+&= \begin{vmatrix}
+1 & 0 & \cdots & 0 & 0 \\
+1 & 1 & \cdots & 0 & 0 \\
+\cdots & \cdots & \cdots & \cdots & \cdots \\
+1 & 1 & \cdots & 1 & 0 \\
+1 & 1 & \cdots & 1 & 1
+\end{vmatrix}
+\end{align*}
+$$
+
+.[^iid] So $\dfrac{\text{d}\vec{x}}{\text{d}\vec{l}}$ is a lower triangular matrix with all one's, and its determinant is $1$. So $\vec{l}$ has a p.d.f. of $f_\vec{x} (\vec{x})$, which is a uniform distribution, times $1$. So $\vec{l}$ also follows a uniform distribution. $\blacksquare$
+
+[^iid]: Everything there is independent, so only $\dfrac{\text{d}l_i}{\text{d}l_i} = 1$, and all other $j\neq i$ has $\dfrac{\text{d}l_j}{\text{d}l_i} = 0$.
+
+
+## The above distribution is Dirichlet distribution
 
 Proof will come soon...
 
