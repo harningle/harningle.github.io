@@ -16,31 +16,31 @@ From easy to difficult, here are some PDFs that I often encounter in my day job.
 
 **Pure Text.** Nothing fancy; just a bunch of text. The tricky point is to get section titles, font style (e.g. italic vs bold), footnotes, etc. correct. The example is from European Investment Bank ([2023](https://thedocs.worldbank.org/en/doc/3258e1d4c1e84fd961b79fe54e7df85c-0020012023/original/2023-0128-MDB-Report-2022-NEW.pdf), p. viii).
 
-<div style="display: flex; justify-content: center; height: 50vh;">
+<div style="display: flex; justify-content: center; height: 50vh; margin-bottom: 3vh;">
     <object data="/assets/pdfs/text.pdf" width="100%" type='application/pdf'></object>
 </div>
 
 **Simple Tables.** Tables are especially difficult to parse, especially when there is no grid lines separating the rows and columns. The example below is also from European Investment Bank ([2023](https://thedocs.worldbank.org/en/doc/3258e1d4c1e84fd961b79fe54e7df85c-0020012023/original/2023-0128-MDB-Report-2022-NEW.pdf), p. 7). The page has two very simple tables: there are horizontal grid lines, and tables have non-white background colours, so we can easily distinguish them with the text. A good parser should be able to handle this type of simple tables.
 
-<div style="display: flex; justify-content: center; height: 50vh;">
+<div style="display: flex; justify-content: center; height: 50vh; margin-bottom: 3vh;">
     <object data="/assets/pdfs/table.pdf" width="100%" type='application/pdf'></object>
 </div>
 
 **Complicated Tables.** Moreover, tables can have merged cells, wrapped/multi-line text within a cell, etc. Our example is from Apple ([2025](https://developer.apple.com/metal/Metal-Feature-Set-Tables.pdf), p. 13).
 
-<div style="display: flex; justify-content: center; height: 50vh;">
+<div style="display: flex; justify-content: center; height: 50vh; margin-bottom: 3vh;">
     <object data="/assets/pdfs/weird_table.pdf" width="100%" type='application/pdf'></object>
 </div>
 
 **Raster Images.** The parser should be able to extract the images, and tell us which image is on which page. There are two types of images, raster and vector. Raster is basically a pure image. We take an example from Two Sigma ([2017](https://www.twosigma.com/wp-content/uploads/StreetView_Feb_2017_Public_v5.pdf), p. 3). This example not only has images, but is also a multi-column page, so we can test the parsers' performance for this type of pages as well.
 
-<div style="display: flex; justify-content: center; height: 50vh;">
+<div style="display: flex; justify-content: center; height: 50vh; margin-bottom: 3vh;">
     <object data="/assets/pdfs/raster_image.pdf" width="100%" type='application/pdf'></object>
 </div>
 
 **Vector Images.** Vector images are slightly different from the raster. Technically they are just shapes like lines or curves, which are exactly the same as a grid line in a table. In addition, a vector image may contain text, such as numbers on the axis. These text are part of the image, rather than the usual main text. We want to treat a vector image in the same way as a usual raster. The example page is from European Investment Bank ([2023](https://thedocs.worldbank.org/en/doc/3258e1d4c1e84fd961b79fe54e7df85c-0020012023/original/2023-0128-MDB-Report-2022-NEW.pdf), p. vix).
 
-<div style="display: flex; justify-content: center; height: 50vh;">
+<div style="display: flex; justify-content: center; height: 50vh; margin-bottom: 3vh;">
     <object data="/assets/pdfs/vector_image.pdf" width="100%" type='application/pdf'></object>
 </div>
 
