@@ -35,6 +35,7 @@ plugins:
     - jekyll-remote-include
 minima:
     skin: auto
+future: true
 
 
 # giscus comments
