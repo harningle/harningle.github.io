@@ -2,10 +2,9 @@
 layout:       post
 title:        "Tesseract: Fine-tuning and reproducibility"
 date:         2025-07-26
+last_updated: 2025-08-09
 tags:         [ml]
 ---
-
-<p><font color="#828282">(Code will be made available soon)</font></p>
 
 As part of our effort to compile a [Formula 1 database](https://github.com/harningle/fia-doc), we need to read [PDF documents](https://www.fia.com/documents), [some](https://www.fia.com/system/files/decision-document/2025_austrian_grand_prix_-_final_race_classification.pdf) of which are essentially images rather than texts. So OCR is a must. Nowadays, OCR seems to be trivial with Gemini or ChatGPT. However, it may not be [free](https://ai.google.dev/gemini-api/docs/pricing), not very [replicable](https://ai.google.dev/gemini-api/docs/prompting-strategies#under-the-hood),[^top-p] not consistent in style,[^consistency] and, most importantly, not able to handle the page layout or tables (see [the previous post on PDF parsers]({% link _posts/2025-06-11-pdf-parsers-a-benchmark.md %})). So more "traditional" OCR tools are preferred. Among them [Tesseract](https://github.com/tesseract-ocr/tesseract) seems to be the best.[^why-tesseract] Yet, Tesseract has its own problems: the accuracy is not even close to the above large models, and it is not fully reproducible either. We can improve OCR accuracy by fine tuning, and pin some package versions to help with reproducibility. This post walks through all these things. (But we still can't achieve fully deterministic output).
 
@@ -118,6 +117,8 @@ Note that `usr/share/tessdata` is NOT a typo. It's `usr/` rather than <code clas
 
 The training data need to put in the `data` folder. If we want to have a model name of `foo`, then training samples should be in `./data/foo-ground-truth`. Each training sample consists of two files: the image and the text. The file naming should be `abc.png` and `abc.gt.txt`. The training script accepts `.png` and `.tif`.
 
+One last note is that the ground truth can't be an empty string. It's very possible that the ground truth should be empty, but tesseract simply does not accept that. In my case, I use "placeholder" char. for empty string. That is, when the ground truth should be an empty string, I put something like `".\n"` in `abc.gt.txt`. I then manually process these "placeholder" char. after OCR. See [tesseract-ocr/tesstrain#304](https://github.com/tesseract-ocr/tesstrain/issues/304) for details.
+
 
 ### Install Python dependencies
 
@@ -163,7 +164,7 @@ make training MODEL_NAME=foo START_MODEL=eng PSM=7 MAX_ITERATIONS=5000
 * `training`: train/fine-tune a model
 * `MODEL_NAME`: name of the model to be trained. It must match the training data folder name. That is, if `MODEL_NAME=bar`, then the images and texts for training should be inside `data/bar-ground-truth`
 * `START_MODEL`: from what model to start fine-tuning. We usually want English `eng`. The default is nothing, i.e. train a brand new model from scratch
-* `PSM`: page segmentation mode. Check [TESSERACT(1) Manual Page](https://github.com/tesseract-ocr/tesseract/blob/main/doc/tesseract.1.asc#options). Here I used `PSM=7`, which is a single line text
+* `PSM`: page segmentation mode. Check [TESSERACT(1) Manual Page](https://github.com/tesseract-ocr/tesseract/blob/main/doc/tesseract.1.asc#options). Here I used `PSM=7`, which is a single line text. I found PSM matters *a lot* in both training and inference. Check [https://pyimagesearch.com/2021/11/15/tesseract-page-segmentation-modes-psms-explained-how-to-improve-your-ocr-accuracy/](https://pyimagesearch.com/2021/11/15/tesseract-page-segmentation-modes-psms-explained-how-to-improve-your-ocr-accuracy/) for detailed explanations and examples of different PSMs. `PSM=13` may deserve some extra attention
 * `MAX_ITERATIONS`: max iterations. You can leave it blank. I found my training converges quite quickly
 
 A more detailed explanation can be found [here](https://github.com/tesseract-ocr/tesstrain?tab=readme-ov-file#train). Please note that it's not very documented. You'd better play around with them a bit and see how they affect the training. E.g. `FINETUNE_TYPE` is not explained anywhere and I found this parameter had zero effect on my training.[^finetune-type]
