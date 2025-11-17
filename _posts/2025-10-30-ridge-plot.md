@@ -12,7 +12,7 @@ We often want to visualise distributions by subgroup, e.g. income distribution b
 
 <figure style="width: 60%">
     <img src="/assets/images/ridge_plot_bad.svg">
-    <p><i>Source</i>: Segarra and Teruel (<i>JEBO</i><a href="https://doi.org/10.1016/j.jebo.2012.02.012">2012</a>), Figure 4</p>
+    <p><i>Source</i>: Segarra and Teruel (<i>JEBO</i> <a href="https://doi.org/10.1016/j.jebo.2012.02.012">2012</a>), Figure 4</p>
 </figure>
 
 However, this is not very eye friendly. A fancier way is to use a ridge plot. The figure is much easier to digest, especially when the subgroups are time related. In the below example, we clearly see, as times passes, the median doesn't change a lot, but the density goes from one mode to multi modal.
