@@ -189,34 +189,36 @@ $(document).ready(function() {
 <!-- https://github.com/kaushikgopal/henry-hugo/blob/master/assets/js/sidenotes.js -->
 <script>
 function makeSideNotes() {
-  // Some positioning vars.
-  const $footnotes      = $(".footnotes"),
-    contentWidth        = $(".wrapper").outerWidth(),
-    sideNoteStartMargin = parseInt($(".post-title").css("margin-bottom")) * 2,
-    sideNoteMaxWidth    = contentWidth / 2.75,
-    sideNoteMinWidth    = contentWidth / 5;
-
-  // Exit if no footnote at all
+  const $footnotes      = $(".footnotes");
   if ($footnotes.length < 1) {
     return;
   }
 
-  // Show sidenotes
-  loadSideNotesFromFootnotes();
-
-  // If the browser's size changes, change the size/positioning of the
-  // sidenotes as well
-  $(window).resize(function () {
-    loadSideNotesFromFootnotes();
-  });
+  // Select only footnote-reference <sup> elements, not every <sup> on the page
+  // Hugo's default footnote renderer wraps the ref link in <sup>, e.g.
+  // <sup id="fnref:1"><a href="#fn:1" class="footnote-ref">1</a></sup>
+  function getFootnoteSups() {
+    return $("sup").filter(function () {
+      const $s = $(this);
+      if ($s.attr("id") && $s.attr("id").indexOf("fnref") === 0) return true;
+      if ($s.find("a.footnote-ref").length) return true;
+      if ($s.find("a[href^='#fn:'], a[href^='#fn']").length) return true;
+      return false;
+    });
+  }
 
   function loadSideNotesFromFootnotes() {
-    // Compute the positioning of sidenotes
-    const $postTitle = $(".post-title"),
-      browserWidth   = $(".site-header").width(),
-      startPosition  = $postTitle.position().left
-        + $postTitle.outerWidth()
-        + sideNoteStartMargin;
+    // Positioning
+    const $wrapper = $(".wrapper");
+    const $postTitle = $(".post-title");
+    const contentWidth = $wrapper.outerWidth();
+    const sideNoteStartMargin = 
+      parseInt($postTitle.css("margin-bottom"), 10) * 2;
+    const sideNoteMinWidth = contentWidth / 5;
+    const browserWidth = $(".site-header").width();
+    const postLeft = $postTitle.position().left;
+    const postRight = postLeft + $postTitle.outerWidth();
+    const startPosition = postRight + sideNoteStartMargin;
 
     // Remove any existing sidenotes, e.g. those before browser window resizing
     $(".sidenotes").remove();
@@ -224,19 +226,39 @@ function makeSideNotes() {
 
     // Check if have enough space to show sidenotes. On mobile devices usually
     // there is no such space so won't show them
-    const availabeSpaceForSideNote = browserWidth - startPosition;
-    if (availabeSpaceForSideNote < sideNoteMinWidth) {
+    const availableSpaceForSideNote = browserWidth - startPosition;
+    if (availableSpaceForSideNote < sideNoteMinWidth) {
       return;
     }
 
+    // Compute the right-edge offset for left-side sidenotes so they mirror
+    // the right-side ones around the post column
+    const leftSideRightOffset = browserWidth - postLeft + sideNoteStartMargin;
+
     // Create sidenotes for each footnote
     const $fnItems = $footnotes.find("ol li");
-    $("sup").each(function (index) {
-      const $footnoteHtml = $fnItems.eq(index).html();
-      createSideNote($(this), $footnoteHtml, startPosition, index);
+    const $sups = getFootnoteSups();
+    $sups.each(function (index) {
+      const $sup = $(this);
+      const href = $sup.find("a[href^='#fn']").attr("href");
+      if (!href) return;
+
+      const targetId = href.slice(1);
+      const escapedId = $.escapeSelector
+        ? $.escapeSelector(targetId)
+        : targetId.replace(/([ !"#$%&'()*+,./:;<=>?@[\\\]^`{|}~])/g, "\\$1");
+      const $li = $footnotes.find("#" + escapedId);
+      if (!$li.length) return;
+
+      createSideNote(
+        $sup,
+        $li.html(),
+        startPosition,
+        leftSideRightOffset,
+        index
+      );
     });
   }
-
 
   function removeReverseFootnote(text) {
     // Find the return to text hyperlink in footnote
@@ -248,8 +270,13 @@ function makeSideNotes() {
     return text;
   }
 
-
-  function createSideNote(superscript, footnoteHtml, startPosition, i) {
+  function createSideNote(
+      superscript,
+      footnoteHtml,
+      startPosition,
+      leftSideRightOffset,
+      i
+  ) {
     // Construct sidenote div
     let div = $(document.createElement('div'))
       .html(removeReverseFootnote(footnoteHtml))
@@ -264,26 +291,39 @@ function makeSideNotes() {
     const topPosition = superscript.offset();
     div.css({
       position: "absolute",
-      top: topPosition["top"]
+      top: topPosition.top
     });
     if (i % 2 === 0) {
-      div.css({left: startPosition});
+      div.css({ left: startPosition });
     } else {
-      div.css({right: startPosition});
+      div.css({ right: leftSideRightOffset });
     }
 
     // When the mouse is hovering on the footnote superscript, highlight the
     // sidenode, as the default font colour of the sidenote is slightly muted
-    superscript.hover(function () {
+    superscript.off("mouseenter.sidenote mouseleave.sidenote");
+    superscript.on("mouseenter.sidenote", function () {
       div.addClass("hover");
-    }, function () {
-        div.removeClass("hover");
+    });
+    superscript.on("mouseleave.sidenote", function () {
+      div.removeClass("hover");
     });
 
     // Add sidenote div
     $(document.body).append(div);
   }
-};
+
+  // Show sidenotes
+  loadSideNotesFromFootnotes();
+
+  // If the browser's size changes, change the size/positioning of the
+  // sidenotes as well
+  let resizeTimer = null;
+  $(window).on("resize.sidenotes", function () {
+    if (resizeTimer) clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(loadSideNotesFromFootnotes, 150);
+  });
+}
 
 // After everything is loaded, show the sidenotes. Need `on("load")` bc.
 // we want to wait all images to be loaded, so the positioning of sidenotes
