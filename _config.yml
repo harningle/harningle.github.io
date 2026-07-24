@@ -33,9 +33,16 @@ plugins:
     - jekyll-feed
     - jekyll-sitemap
     - jekyll-remote-include
+    - jekyll-gfm-admonitions
 minima:
     skin: auto
 future: true
+
+# Admonitions: we ship the CSS via _sass/minima/_admonitions.scss, so disable
+# the plugin's per-page <style> injection. That injection also crashes on
+# incremental builds (page.output is nil for pages it didn't re-render).
+gfm_admonitions:
+    inject_css: false
 
 
 # giscus comments

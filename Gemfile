@@ -18,9 +18,10 @@ group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.17"
 end
 
-# Include external HTML
+# Include external HTML and admonitions
 group :jekyll_plugins do
     gem 'jekyll-remote-include', :github => 'netrics/jekyll-remote-include'
+    gem "jekyll-gfm-admonitions"
 end
 
 # warning: fiddle was loaded from the standard library, but will no longer be part of the default gems starting from Ruby 3.5.0

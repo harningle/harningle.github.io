@@ -1,0 +1,60 @@
+// GitHub-flavoured markdown admonitions (jekyll-gfm-admonitions).
+//
+// The plugin renders each admonition as:
+//   <div class="markdown-alert markdown-alert-note">
+//     <p class="markdown-alert-title"><svg .../> Note</p>
+//     ...body...
+//   </div>
+// and injects an inline octicon SVG into the title. We disable the plugin's
+// own CSS injection (gfm_admonitions.inject_css: false in _config.yml) and
+// style the alerts here so they follow the site palette.
+//
+// The theme is light-only (minima 2.5.1, no skins), so there is no dark
+// variant. NOTE reuses the site brand colour ($brand-color) to tie in with
+// links; the other accents sit in the same brightness family so the set
+// reads as one system on the near-white ($background-color) page. The 4px
+// left border matches the blockquote treatment in _base.scss.
+
+$admonition-colours: (
+  note:      $brand-color,   // #2a7ae2, same as links
+  tip:       #2e974f,
+  important: #8250df,
+  warning:   #bf8700,
+  caution:   #d1242f,
+);
+
+.markdown-alert {
+  padding: 0.6em 1em;
+  margin-bottom: calc((#{$spacing-unit}) / 2);
+  border-left: 4px solid $grey-color-light;
+  border-radius: 0 3px 3px 0;
+  color: $text-color;
+
+  > :first-child { margin-top: 0; }
+  > :last-child  { margin-bottom: 0; }
+
+  .markdown-alert-title {
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    font-weight: 600;
+    margin-bottom: 0.5em;
+  }
+
+  // The octicon inherits the title colour.
+  svg {
+    margin-right: 0.5rem !important;
+    fill: currentColor;
+
+    path { fill: currentColor; }
+  }
+}
+
+@each $type, $colour in $admonition-colours {
+  .markdown-alert-#{$type} {
+    border-left-color: $colour;
+    background-color: mix($colour, $background-color, 6%);
+
+    .markdown-alert-title { color: $colour; }
+  }
+}
