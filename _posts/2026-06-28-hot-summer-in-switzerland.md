@@ -30,7 +30,7 @@ Many people say Switzerland doesn't have AC because it wasn't hot in the past. I
 <figure>
     {% remote_include https://raw.githubusercontent.com/harningle/useful-scripts/refs/heads/main/hot_summer/figures/hot_days_heatmap.html %}
     <p style="margin-bottom: 0px;"><i>Source</i>: MeteoSwiss. 2026. <i>Climate Stations - Homogeneous Data Series.</i> Zurich, Switzerland: Federal Department of Home Affairs. <a href="https://data.geo.admin.ch/browser/index.html#/collections/ch.meteoschweiz.ogd-nbcn/items/gve?.asset=asset-ogd-nbcn_gve_d_historical-csv">https://data.geo.admin.ch/browser/index.html#/collections/ch.meteoschweiz.ogd-nbcn/items/gve?.asset=asset-ogd-nbcn_gve_d_historical-csv</a>.</p>
-    <p><i>Notes</i>: The colour indicates the number of days with the highest temperature falling inside the temperature range in the year. This figure was generated on 2026/06/28, so we only have partial data for 2026; all previous years have full-year data.</p>
+    <p><i>Notes</i>: The colour indicates the number of days with the highest temperature falling inside the temperature range in the year. This figure was generated on 2026/07/28, so we only have partial data for 2026; all previous years have full-year data.</p>
 </figure>
 
 
