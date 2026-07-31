@@ -53,7 +53,6 @@ $admonition-colours: (
 @each $type, $colour in $admonition-colours {
   .markdown-alert-#{$type} {
     border-left-color: $colour;
-    background-color: mix($colour, $background-color, 6%);
 
     .markdown-alert-title { color: $colour; }
   }
