@@ -2,7 +2,7 @@
 layout:       post
 title:        "NumPy: MKL vs OpenBLAS"
 date:         2024-11-05
-tags:         [stats]
+tags:         stat
 ---
 
 <p><font color="#828282">(Code available at <a href="https://github.com/harningle/useful-scripts/tree/main/numpy/mkl-vs-openblas.py">harningle/useful-scripts</a>)</font></p>

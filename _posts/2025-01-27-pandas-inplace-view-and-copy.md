@@ -2,7 +2,7 @@
 layout:       post
 title:        "pandas: inplace, view, and copy"
 date:         2025-01-27
-tags:         [python, stats]
+tags:         [python, stat]
 ---
 
 In recent pandas versions, I sometimes get <code class="highlighter-rouge">FutureWarning: Downcasting behavior in `replace` is deprecated</code> warnings when I use `inplace=True`, e.g. `df.x.replace({1: True, 0: False}, inplace=True)`. And I never understand the `SettingWithCopyWarning` either. I thought inplace operations should be preferred, as they are faster and they save memory, because they do things inplace rather than copying the object. After some readings, I realise I was wrong. The takeaways are
