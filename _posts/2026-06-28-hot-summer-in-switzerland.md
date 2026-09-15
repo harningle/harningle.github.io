@@ -2,12 +2,13 @@
 layout:       post
 title:        "Hot summer in Switzerland"
 date:         2026-06-28
+last_updated: 2026-09-15
 tags:         [stat]
 ---
 
 <p><font color="#828282">(Code available at <a href="https://github.com/harningle/useful-scripts/tree/main/hot_summer">harningle/useful-scripts</a>)</font></p>
 
-I just don't understand why we don't have AC in Switzerland...
+It's now official: we got a [record breaking summer](https://www.swissinfo.ch/eng/climate-adaptation/switzerlands-record-breaking-summer-by-numbers/92037728)! I just don't understand why we don't have AC in Switzerland...
 
 
 ## Heat-related death in Switzerland is of a similar magnitude to gun death in the US
