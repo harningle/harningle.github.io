@@ -2,11 +2,18 @@
 layout:       post
 title:        "“Best” papers"
 date:         2024-12-25
-last_updated: 2025-05-31
+last_updated: 2026-09-16
 tags:         [econ]
 ---
 
 I left economics a few years ago but it keeps "amazing" me over and over. Here are the "best" (not necessarily econ) papers I've read in each year, i.e. my "best" paper awards.
+
+
+## 2026: Justifiable ir-reproducibility
+
+**Aczel, Balazs, Barnabas Szaszi, Harry T. Clelland, et al.** 2026. "Investigating the Analytical Robustness of the Social and Behavioural Sciences." *Nature* 652: 135--42. doi: [10.1038/s41586-025-09844-9](https://doi.org/10.1038/s41586-025-09844-9).
+
+Using the identical dataset, multiple independent researchers can conduct justifiably different analysis, and only one-third yields the same result. A similar paper in finance calls this "nonstandard errors" (Menkveld et al., *JoF* [2024](https://doi.org/10.1111/jofi.13337)).
 
 
 ## 2025: I am Corning
@@ -21,7 +28,7 @@ I left economics a few years ago but it keeps "amazing" me over and over. Here a
 * [*QJE* R&R](https://web.archive.org/web/20250404234241/https://aidantr.github.io/)
 
 
-## 2024: *feng shui* geomancer (算命先生)
+## 2024: *Feng shui* geomancer (算命先生)
 
 **Hong, Justin Jihao, and Yuheng Zhao.** 2024. "The Costs of Leader Biases: Evidence from Superstitious Chinese Mayors." Paper Presented at [NBER Development Economics Program Meeting (2024 Fall)](https://www.nber.org/conferences/development-economics-fall-2024). [https://hjihao.github.io/justinhong_leader_jmp.pdf](https://hjihao.github.io/justinhong_leader_jmp.pdf).
 
@@ -48,7 +55,7 @@ Matray divides pre-treatment DID coefficients by a factor of $1.8$ to make the u
 If my reading is correct, you need 33 years to catch up if you do a PhD lol.
 
 
-## 2022: masturbation (正太控)
+## 2022: Masturbation (正太控)
 
 **Karl, Andersson.** 2022. "I Am Not Alone -- We Are All Alone: Using Masturbation as an Ethnographic Method in Research on *shota* Subculture in Japan." *Qualitative Research*. doi: [10.1177/14687941221096600](https://doi.org/10.1177/14687941221096600
 ).
@@ -73,7 +80,7 @@ I actually quite like this paper, not in a sarcastic way:
 * my prior is that many SOTAs in CV are created by p hacking random seeds...
 
 
-## 2022 honourable mention: adverse incentive (打不过就开摆)
+## 2022 honourable mention: Adverse incentive (打不过就开摆)
 
 **Brown, Jennifer.** 2011. "Quitters Never Win: The (Adverse) Incentive Effects of Competing with Superstars." *Journal of Political Economy* 119 (5): 982--1013. doi: [10.1086/663306](https://doi.org/10.1086/663306).
 
@@ -84,14 +91,14 @@ I actually quite like this paper, not in a sarcastic way:
 [^bbc]: [https://www.bbc.co.uk/newsround/19075263](https://www.bbc.co.uk/newsround/19075263).
 
 
-## 2021: sunlight *causes* collectivism (太阳光把我照瞎了所以只能依赖集体)
+## 2021: Sunlight *causes* collectivism (太阳光把我照瞎了所以只能依赖集体)
 
 **Fredriksson, Per G., and Aatishya Mohanty.** 2021. "Sunlight and Culture." *Journal of Economic Behavior & Organization* 188: 757--82. doi: [10.1016/j.jebo.2021.05.033](https://doi.org/10.1016/j.jebo.2021.05.033).
 
 > Populations exposed to [more sunlight] have higher incidence of [...] eye disease [...], rais[ing] the level of uncertainty avoidance [...] and [...] facilitating [...] collectivism.
 
 
-## 2020: online exam cheating (作弊大师)
+## 2020: Online exam cheating (作弊大师)
 
 **Bilena, Eren, and Alexander Matros.** 2021. "Online Cheating amid COVID-19." *Journal of Economic Behavior & Organization* 182: 196--211. doi: [10.1016/j.jebo.2020.12.004](https://doi.org/10.1016/j.jebo.2020.12.004).
 
@@ -116,7 +123,7 @@ I went to a seminar of this paper in 2019, and the author photoshopped a book wi
 One author of our [2024 best paper *feng shui* geomancer (算命先生)](#2024-feng-shui-geomancer-算命先生) is the student of one author of this paper.
 
 
-## 2019 honourable mention: fairy (舞法天女)
+## 2019 honourable mention: Fairy (舞法天女)
 
 **Ma, Chun, Fei Jiang, Feng-Tao Sheng, Yinchun Jiao, Guang-Jian Mei, and Feng Shi.** 2019. "Design and Catalytic Asymmetric Construction of Axially Chiral 3,3'-Bisindole Skeletons." *Angewandte Chemie* 58: 3014--20. doi: [10.1002/anie.201811177](https://doi.org/10.1002/anie.201811177).
 
@@ -125,7 +132,7 @@ One author of our [2024 best paper *feng shui* geomancer (算命先生)](#2024-f
 I thought chemistry would use more serious cover images...
 
 
-## 2018: bridges (修桥)
+## 2018: Bridges (修桥)
 
 **Brooks, Wyatt, and Kevin Donovan.** 2020. "Eliminating Uncertainty in Market Access: The Impact of New Bridges in Rural Nicaragua." *Econometrica* 88 (5): 1965--97. doi: [10.3982/ECTA15828](https://doi.org/10.3982/ECTA15828).
 
@@ -135,5 +142,4 @@ I thought chemistry would use more serious cover images...
 A bridge costs $40,000, and they built six bridges.
 
 In [old working paper version](https://economics.yale.edu/sites/default/files/nicaraguabridges_web.pdf), they wrote "[w]e build bridges that eliminate this risk", but the published version above writes "[w]e study the impact of new bridges that eliminate this risk." I love the old one. Sounds richer.
-
 
