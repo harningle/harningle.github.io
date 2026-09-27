@@ -1,0 +1,254 @@
+<!-- Price against measured llama.cpp throughput, with the efficient frontier.
+     Data comes from _data/gpu_rent.json, inlined by Liquid when the site is built. -->
+<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+    <label for="gpu-bench-pick" style="font-size: 14px; color: #555555;">Benchmark</label>
+    <select id="gpu-bench-pick" style="font-size: 14px; padding: 2px 4px;">
+        <option value="tg" selected>tg128, token generation</option>
+        <option value="pp">pp512, prompt processing</option>
+    </select>
+</div>
+<div id="gpu-price-vs-speed" style="height: 480px"></div>
+
+<script>
+/* Load Highcharts once, however many of these figures the page includes. */
+window.gpuHighcharts = window.gpuHighcharts || new Promise(function (resolve, reject) {
+    var s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/highcharts@12.4.0/highcharts.js';
+    s.onload = resolve;
+    s.onerror = function () { reject(new Error('cannot load Highcharts')); };
+    document.head.appendChild(s);
+});
+</script>
+
+<script>
+window.gpuHighcharts.then(function () {
+
+const DATA = {{ site.data.gpu_rent | jsonify }};
+
+const FONT = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+const MONO = 'ui-monospace, "SFMono-Regular", Consolas, monospace';
+const T = {
+    ink: '#111111', ink2: '#555555', ink3: '#828282',
+    rule: '#d5d5d5', rule2: '#ececec', surface: '#fdfdfd',
+};
+const KEYS = [
+    { key: 'vast_ai:ondemand', label: 'vast.ai' },
+    { key: 'runpod:community', label: 'RunPod community' },
+    { key: 'runpod:secure',    label: 'RunPod secure' },
+    { key: 'autodl:listed',    label: 'AutoDL' },
+];
+
+/* llama.cpp CUDA scoreboard, Llama 2 7B Q4_0, no flash attention, read 2026-09-27 from
+   github.com/ggml-org/llama.cpp/discussions/15013 (last updated 2026-09-19).
+   `exact: false` means the scoreboard row names a family, not this specific edition: "A100
+   80 GB" does not separate PCIe from SXM4, and "RTX PRO 6000 Blackwell" does not say which of
+   the three power classes was measured. Generation is bandwidth-bound and these share a memory
+   system, so tg128 should be close; prompt processing is compute-bound and will not be.
+   `via: 'comment'` is a run posted in the discussion's comments that the maintainer has not
+   promoted to the table. The other 11 cards in the snapshot have no entry at all. */
+const PERF = {
+    'H200 SXM':                 { tg: 307.79, pp: 10428.65, chip: 'NVIDIA H200',            exact: true,  via: 'comment', build: '1411d9275 (7073)' },
+    'B200':                     { tg: 297.68, pp: 10531.52, chip: 'NVIDIA B200',            exact: true,  via: 'comment', build: '5d195f17b (6839)' },
+    'RTX 5090':                 { tg: 290.02, pp: 14073.41, chip: 'RTX 5090',               exact: true,  via: 'board',   build: '8cf6b42' },
+    'RTX Pro 6000':             { tg: 274.20, pp: 14854.63, chip: 'RTX PRO 6000 Blackwell', exact: false, via: 'board',   build: '79c1160' },
+    'RTX Pro 6000 Max-Q':       { tg: 274.20, pp: 14854.63, chip: 'RTX PRO 6000 Blackwell', exact: false, via: 'board',   build: '79c1160' },
+    'RTX Pro 6000 Workstation': { tg: 274.20, pp: 14854.63, chip: 'RTX PRO 6000 Blackwell', exact: false, via: 'board',   build: '79c1160' },
+    'H100 SXM':                 { tg: 267.81, pp:  9918.34, chip: 'H100 80 GB, HBM3',       exact: true,  via: 'board',   build: '5143fa8' },
+    'H100 PCIe':                { tg: 219.23, pp:  7350.98, chip: 'NVIDIA H100 PCIe',       exact: true,  via: 'comment', build: '5143fa89 (6392)' },
+    'A100 80GB SXM4':           { tg: 190.88, pp:  4849.53, chip: 'A100 80 GB',             exact: false, via: 'board',   build: '5143fa8' },
+    'A100 80GB PCIe':           { tg: 190.88, pp:  4849.53, chip: 'A100 80 GB',             exact: false, via: 'board',   build: '5143fa8' },
+    'RTX 4090 D':               { tg: 189.33, pp: 10293.86, chip: 'RTX 4090 D',             exact: true,  via: 'board',   build: '79c1160' },
+    'RTX 4090':                 { tg: 186.21, pp: 11992.70, chip: 'RTX 4090',               exact: true,  via: 'board',   build: '2241453' },
+};
+
+const BENCH = { tg: 'tg128 token generation', pp: 'pp512 prompt processing' };
+const money = v => '$' + v.toFixed(2);
+
+/* Eight categorical hues plus a symbol, so a card is told apart by hue AND shape AND its own
+   height AND its label, never by hue alone. */
+const HUES = ['#2a78d6', '#eb6834', '#1baf7a', '#eda100', '#e87ba4', '#008300', '#4a3aa7', '#e34948'];
+const SYMBOLS = ['circle', 'diamond', 'square', 'triangle', 'triangle-down'];
+
+/* Fade a dominated mark towards the page: still placed, still its own hue, but out of the way of
+   the handful of offers that are actually on the frontier. */
+function fade(hex, onto, k) {
+    const parts = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+    const [r1, g1, b1] = parts(hex), [r2, g2, b2] = parts(onto);
+    const c = (a, b) => Math.round(a + (b - a) * k).toString(16).padStart(2, '0');
+    return '#' + c(r1, r2) + c(g1, g2) + c(b1, b2);
+}
+
+let chart = null;
+
+function draw(metric) {
+    const cards = DATA.gpus
+        .filter(g => PERF[g.name])
+        .map(g => ({
+            name: g.name, perf: PERF[g.name][metric], exact: PERF[g.name].exact,
+            prices: KEYS.map(function (spec) {
+                const s = g.series[spec.key];
+                return s && s.min != null ? { price: s.min, label: spec.label } : null;
+            }).filter(Boolean),
+        }))
+        .filter(c => c.prices.length);
+
+    /* Editions that share one scoreboard row share one height, so they share one series and one
+       label: three entries at an identical y would only pretend to be three findings. */
+    const groups = [];
+    const byPerf = new Map();
+    for (const c of cards) {
+        if (!byPerf.has(c.perf)) {
+            byPerf.set(c.perf, { perf: c.perf, names: [], marks: [], exact: true });
+            groups.push(byPerf.get(c.perf));
+        }
+        const g = byPerf.get(c.perf);
+        g.names.push(c.name);
+        g.marks.push(...c.prices.map(p => ({ x: p.price, y: c.perf, market: p.label, card: c.name })));
+        g.exact = g.exact && c.exact;
+    }
+
+    const groupName = function (names) {
+        if (names.length === 1) return names[0];
+        const words = names.map(n => n.split(' '));
+        const stem = [];
+        for (let i = 0; i < words[0].length; i++) {
+            if (words.every(w => w[i] === words[0][i])) stem.push(words[0][i]); else break;
+        }
+        return stem.join(' ') || names[0];
+    };
+    const lo = g => Math.min(...g.marks.map(m => m.x));
+
+    const ys = groups.map(g => g.perf);
+    const pad = (Math.max(...ys) - Math.min(...ys)) * 0.2;
+    const yFloor = Math.min(...ys) - pad, yCeil = Math.max(...ys) + pad;
+
+    /* Derived, not fixed: a card added to PERF can be dearer than anything already plotted, and a
+       hard-coded ceiling would quietly crop it out instead of failing loudly. */
+    const xs = groups.flatMap(g => g.marks.map(m => m.x));
+    const xFloor = Math.min(...xs) / 1.35, xCeil = Math.max(...xs) * 1.35;
+    const ticks = [0.2, 0.3, 0.5, 1, 2, 3, 5, 10, 20].filter(v => v >= xFloor && v <= xCeil);
+
+    /* An offer is on the frontier when no other offer is at once no dearer and no slower. That
+       drops a card's own pricier listings too: same tokens per second, more money. */
+    const marks = groups.flatMap(g => g.marks);
+    const dominated = m => marks.some(o => o.x <= m.x && o.y >= m.y && (o.x < m.x || o.y > m.y));
+    const front = marks.filter(m => !dominated(m)).sort((a, b) => a.x - b.x || b.y - a.y);
+
+    /* Close the envelope at both ends so it bounds the whole plot, not just the span it was
+       measured over: a wall dropping from the cheapest card, because nothing is sold below that
+       price at any speed, and a floor running out from the fastest, because paying past it buys
+       no more throughput. step 'left' keeps each tread flat until the dearer card is paid for. */
+    const closed = [[front[0].x, yFloor], ...front.map(m => [m.x, m.y]),
+                    [xCeil, front[front.length - 1].y]];
+
+    const frontier = {
+        type: 'line', name: 'Efficient frontier', data: closed, step: 'left',
+        color: T.ink2, lineWidth: 2, dashStyle: 'ShortDot',
+        marker: { enabled: false }, enableMouseTracking: false, zIndex: 1,
+    };
+
+    /* Name each card above its cheapest mark, which is the one worth finding, and drop the label
+       under its row when the space above is spoken for: either by a label already placed there
+       (both 4090s are cheapest on the same AutoDL listing) or by the marks of a card sitting just
+       overhead (the Pro 6000's cheapest listing runs in under the RTX 5090's dearer ones). */
+    const yGap = (yCeil - yFloor) * 0.06;
+    const taken = [];
+    const underAnotherRow = (x, y) => groups.some(o => o.perf > y && o.perf - y < yGap * 1.8
+        && o.marks.some(m => m.x > x / 1.2 && m.x < x * 1.5));
+    const labels = {
+        type: 'scatter', marker: { enabled: false }, enableMouseTracking: false,
+        showInLegend: false, zIndex: 3,
+        data: [...groups].sort((a, b) => (b.perf / lo(b)) - (a.perf / lo(a))).map(function (g) {
+            const x = lo(g), y = g.perf;
+            const above = !taken.some(p => Math.abs(p.y - y) < yGap
+                                          && Math.abs(Math.log10(p.x / x)) < 0.14)
+                          && !underAnotherRow(x, y);
+            taken.push({ x, y });
+            return {
+                x, y,
+                dataLabels: {
+                    enabled: true, allowOverlap: false, crop: false, overflow: 'allow',
+                    align: 'left', x: -34,
+                    verticalAlign: above ? 'bottom' : 'top', y: above ? -9 : 9,
+                    /* knocked out of the page: the frontier's floor runs along the fastest card's
+                       own height, straight through where that card's label wants to sit */
+                    backgroundColor: T.surface, borderWidth: 0, padding: 3,
+                    format: (g.exact ? '' : '~') + groupName(g.names),
+                    style: { color: T.ink2, fontSize: '11px', fontWeight: '400', textOutline: 'none' },
+                },
+            };
+        }),
+    };
+
+    const dots = groups.map(function (g, i) {
+        const hue = HUES[i % HUES.length];
+        const dim = fade(hue, T.surface, 0.74);
+        return {
+            type: 'scatter', name: (g.exact ? '' : '~') + groupName(g.names), color: hue, zIndex: 2,
+            marker: { symbol: SYMBOLS[i % SYMBOLS.length], radius: 5, lineWidth: 1.5, lineColor: T.surface },
+            custom: { via: PERF[g.names[0]].via, build: PERF[g.names[0]].build },
+            data: g.marks.map(function (m) {
+                const live = !dominated(m);
+                return {
+                    x: m.x, y: m.y, card: m.card, market: m.market, live,
+                    marker: live ? { fillColor: hue, lineColor: T.surface, radius: 6 }
+                                 : { fillColor: dim, lineColor: dim, radius: 4.5 },
+                };
+            }),
+        };
+    });
+
+    if (chart) chart.destroy();
+    chart = Highcharts.chart('gpu-price-vs-speed', {
+        chart: {
+            height: 480, marginRight: 40, backgroundColor: 'transparent',
+            style: { fontFamily: FONT }, spacing: [14, 14, 10, 6],
+        },
+        title: { text: undefined },
+        credits: { enabled: false },
+        accessibility: { enabled: false },
+        legend: {
+            itemStyle: { color: T.ink2, fontWeight: '400', fontSize: '12px' },
+            itemHoverStyle: { color: T.ink }, symbolPadding: 6, margin: 18,
+        },
+        xAxis: {
+            type: 'logarithmic',
+            title: { text: 'USD per GPU-hour', style: { color: T.ink3, fontSize: '11px' } },
+            min: xFloor, max: xCeil, lineColor: T.rule, tickWidth: 0,
+            gridLineColor: T.rule2, gridLineWidth: 1, tickPositions: ticks.map(Math.log10),
+            labels: {
+                formatter() { return '$' + (this.value < 1 ? this.value.toFixed(2) : this.value); },
+                style: { color: T.ink3, fontSize: '11px', fontFamily: MONO },
+            },
+        },
+        yAxis: {
+            title: { text: BENCH[metric] + ', tokens/s', style: { color: T.ink3, fontSize: '11px' } },
+            min: yFloor, max: yCeil, gridLineColor: T.rule2,
+            labels: { style: { color: T.ink3, fontSize: '11px', fontFamily: MONO } },
+        },
+        tooltip: {
+            backgroundColor: '#ffffff', borderColor: T.rule, borderRadius: 2, shadow: false,
+            useHTML: true, style: { color: T.ink, fontSize: '12px', fontFamily: MONO },
+            formatter() {
+                const p = this.point;
+                const src = this.series.options.custom;
+                return '<b>' + p.card + '</b> &middot; ' + p.market + '<br>'
+                       + money(p.x) + ' per GPU-hour<br>'
+                       + p.y.toLocaleString() + ' t/s &middot; '
+                       + (p.y * 3600 / p.x / 1e6).toFixed(2) + 'M tokens per $'
+                       + (p.live ? '<br><b>on the frontier</b>' : '<br>dominated')
+                       + '<br><span style="opacity:.65">'
+                       + (src.via === 'board' ? 'scoreboard' : 'comment thread')
+                       + ' &middot; build ' + src.build + '</span>';
+            },
+        },
+        series: [frontier, labels, ...dots],
+    });
+}
+
+const pick = document.getElementById('gpu-bench-pick');
+pick.addEventListener('change', () => draw(pick.value));
+draw(pick.value);
+
+});
+</script>
